@@ -19,9 +19,9 @@ namespace Elenore
     {
     public:
         VBO(std::vector<GLfloat>vertices);
-        inline void bind() const { glBindBuffer(GL_ARRAY_BUFFER, _vbo); }
-        inline void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
-        inline GLuint getVBO() { return _vbo; }
+        void bind() const { glBindBuffer(GL_ARRAY_BUFFER, _vbo); }
+        void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+        GLuint getVBO() { return _vbo; }
         ~VBO();
     private:
         GLuint _vbo;
@@ -31,8 +31,8 @@ namespace Elenore
     {
     public:
         EBO(std::vector<GLuint>indices);
-        inline void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo); }
-        inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); };
+        void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo); }
+        void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); };
         ~EBO();
     private:
         GLuint _ebo;
@@ -42,9 +42,9 @@ namespace Elenore
     {
     public:
         VAO();
-        inline void bind() const { glBindVertexArray(_vao); }
-        inline void unbind() const { glBindVertexArray(0); }
-        inline GLuint getVAO() const { return _vao; }
+        void bind() const { glBindVertexArray(_vao); }
+        void unbind() const { glBindVertexArray(0); }
+        GLuint getVAO() const { return _vao; }
         ~VAO();
     private:
         GLuint _vao;

@@ -1,6 +1,6 @@
 // Author: oknauta
 // License: 
-// File: engine.cpp
+// File: window.cpp
 // Date: 2024-11-22
 
 #include <iostream>
@@ -9,11 +9,11 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <engine.hpp>
+#include <window.hpp>
 
 namespace Elenore
 {
-    Engine::Engine(int window_width, int window_height, const char *window_title)
+    Window::Window(int window_width, int window_height, const char *window_title)
     {
         glfwWindowHint(GLFW_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_VERSION_MINOR, 3);
@@ -22,30 +22,42 @@ namespace Elenore
         {
             const char *description;
             std::cerr << "Error GLFW " << glfwGetError(&description) << "\n";
+            exit(1);
         }
-        glViewport(0, 0, window_width, window_height);
+        
         _main_window = glfwCreateWindow(window_width, window_height, window_title, nullptr, nullptr);
+        
+        if(!_main_window)
+        {
+            std::cerr << "Error while creating window.\n";
+            glfwTerminate();
+            exit(1);
+        }
+        
         glfwMakeContextCurrent(_main_window);
+        
+        
         if(glewInit() != GLEW_OK)
         {
             std::cerr << "Error GLEW -> " << glewGetErrorString(glewInit()) << "\n";
             glfwTerminate();
+            exit(1);
         }
     }
     
-    void Engine::beginDraw()
+    void Window::beginDraw()
     {
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     }
     
-    void Engine::endDraw()
+    void Window::endDraw()
     {
         glfwSwapBuffers(_main_window);
         glfwPollEvents();
     }
     
-    Engine::~Engine()
+    Window::~Window()
     {
         glfwDestroyWindow(_main_window);
         glfwTerminate();

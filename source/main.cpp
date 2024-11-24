@@ -3,11 +3,11 @@
 // File: main.cpp
 // Date: 2024-11-19
 
-#include <engine.hpp>
+#include <window.hpp>
 #include <shader.hpp>
 #include <mesh.hpp>
 #include <object.hpp>
-#include <text.hpp>
+// #include <text.hpp>
 
 int main(void)
 {
@@ -16,7 +16,7 @@ int main(void)
     const char *WINDOW_TITLE = "Elenore Engine";
     
     // Creating an engine 
-    Elenore::Engine engine(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+    Elenore::Window engine(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
     
     // Elenore::Text text("Hello, world!", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, 255, 255, 255);
     
@@ -38,14 +38,14 @@ int main(void)
     "#version 330 core\n"
     "layout(location = 0) in vec3 aPos;\n"
     "void main() {\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "   gl_Position = vec4(aPos, 1.0);\n"
     "}\n";
     
     const char *source_fragment_shader =
     "#version 330 core\n"
     "out vec4 FragColor;\n"
     "void main()\n"
-    "{FragColor = vec4(1.0, 0.0, 0.0, 1.0);}\n";
+    "{FragColor = vec4(1.0, 1.0, 0.0, 1.0);}\n";
 
     
     Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);

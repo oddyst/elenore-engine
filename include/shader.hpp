@@ -18,16 +18,24 @@ namespace Elenore
     class Shader
     {
     public:
-        Shader(const char *source_vertex_shader, const char *source_fragment_shader);
-        inline GLuint getProgram() const { return _program_id; }
-        ~Shader();
+        Shader(const char *vertex_path, const char *fragment_path);
+        GLuint getProgram() const { return _program_id; }
     private:
-        void checkShaderCompile(GLuint programID, bool is_shader);
-        void compileShader(GLenum shader_type, GLuint shader, const char *shader_source, GLboolean is_shader);
         GLuint _program_id;
-        GLuint _fragment_shader;
-        GLuint _vertex_shader;
-        const char *_source_vertex_shader, *_source_fragment_shader;
+        /**
+         * @brief Compile or link a shader to a program.
+         * @param shader_type It can be `GL_VERTEX_SHADER` or `GL_FRAGMENT_SHADER`.
+         * @param shader The shade that will compile.
+         * @param shader_source The shader source.
+         * @param is_shader If it is a shader or a program. It must be `GL_TRUE` for shader or `GL_TRUE` for program.
+         */
+        GLuint compileShader(GLenum shader_type, const char *shader_source);
+        /**
+         * @brief Checks if the shader success the compile.
+         * @param program The shader or program.
+         * @param is_shader If it is a shader or a program. It must be `GL_TRUE` for shader or `GL_FALSE` for program.
+         */
+        void compileCheck(GLuint program, GLboolean is_shader);
     };
     
 } // Elenore

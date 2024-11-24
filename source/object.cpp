@@ -10,13 +10,19 @@ namespace Elenore
     Object::Object(Mesh *mesh, const char *object_name) : _mesh(mesh), _name(object_name)
     {
         std::cout << "Object in scene: " << _name << "\n";
+        
+        
     }
     
     void Object::draw()
     {
+        // Use the program shader.
         glUseProgram(_mesh->getShader().getProgram());
+        
+        // Drawing the frame
         glBindVertexArray(_mesh->getVAO());
         glDrawElements(GL_TRIANGLES, _mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
+
 } // Elenore

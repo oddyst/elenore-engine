@@ -27,10 +27,10 @@ namespace Elenore
          * @param indices The mesh indices that will be storaged
          */
         Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader shader);
-        inline Shader getShader() const { return _shader; }
-        inline std::vector<GLfloat>getVertices() const { return this->_vertices; };
-        inline std::vector<GLuint>getIndices() const { return this->_indices; };
-        inline GLuint getVAO() const { return _vao->getVAO(); }
+        Shader &getShader() { return _shader; }
+        std::vector<GLfloat>getVertices() const { return this->_vertices; };
+        std::vector<GLuint>getIndices() const { return this->_indices; };
+        GLuint getVAO() const { return _vao->getVAO(); }
     private:
         std::unique_ptr<VAO> _vao;
         std::unique_ptr<EBO> _ebo;

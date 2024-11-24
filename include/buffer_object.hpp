@@ -1,0 +1,56 @@
+// Author: oknauta
+// License: 
+// File: buffer_object.hpp
+// Date: 2024-11-23
+
+#ifndef BUFFER_OBJECT
+#define BUFFER_OBJECT
+
+#include <iostream>
+#include <vector>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+
+namespace Elenore
+{
+    class VBO
+    {
+    public:
+        VBO(std::vector<GLfloat>vertices);
+        inline void bind() const { glBindBuffer(GL_ARRAY_BUFFER, _vbo); }
+        inline void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+        inline GLuint getVBO() { return _vbo; }
+        ~VBO();
+    private:
+        GLuint _vbo;
+    };
+    
+    class EBO
+    {
+    public:
+        EBO(std::vector<GLuint>indices);
+        inline void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo); }
+        inline void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); };
+        ~EBO();
+    private:
+        GLuint _ebo;
+    };
+    
+    class VAO
+    {
+    public:
+        VAO();
+        inline void bind() const { glBindVertexArray(_vao); }
+        inline void unbind() const { glBindVertexArray(0); }
+        inline GLuint getVAO() const { return _vao; }
+        ~VAO();
+    private:
+        GLuint _vao;
+    };
+    
+    
+} // Elenore
+
+#endif // BUFFER_OBJECT

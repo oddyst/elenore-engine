@@ -15,8 +15,8 @@ int main(void)
     const int WINDOW_HEIGHT = 600;
     const char *WINDOW_TITLE = "Elenore Engine";
     
-    // Creating an engine 
-    Elenore::Window engine(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+    // Creating an window 
+    Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
     
     // Elenore::Text text("Hello, world!", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, 255, 255, 255);
     
@@ -54,13 +54,13 @@ int main(void)
     
     Elenore::Object square(mesh, "Square");
     
-    while(!engine.windowShouldClose())
+    while(!window.windowShouldClose())
     {
-        engine.beginDraw();
+        window.beginDraw();
         
         square.draw();
         
-        engine.endDraw();
+        window.endDraw();
     }
     
     // delete mesh;

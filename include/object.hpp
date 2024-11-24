@@ -22,7 +22,7 @@ namespace Elenore
     class Object
     {
     public:
-        Object(Mesh *mesh, std::string object_name, glm::vec3 position);
+        Object(std::shared_ptr<Mesh>mesh, std::string object_name, glm::vec3 position);
         void draw();
     private:
         // Mesh *_mesh;

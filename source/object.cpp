@@ -7,7 +7,7 @@
 
 namespace Elenore
 {
-    Object::Object(Mesh *mesh, std::string object_name, glm::vec3 position)
+    Object::Object(std::shared_ptr<Mesh>mesh, std::string object_name, glm::vec3 position)
     : _mesh(mesh), _name(object_name), _position(position)
     {
         std::cout << "Object in scene: " << _name << "\n";

@@ -50,7 +50,9 @@ int main(void)
     
     Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);
     
-    Elenore::Mesh *mesh = new Elenore::Mesh(vertices, indices, yellow_shader);
+    // Elenore::Mesh *mesh = new Elenore::Mesh(vertices, indices, yellow_shader);
+    
+    std::shared_ptr<Elenore::Mesh>mesh = std::make_unique<Elenore::Mesh>(vertices, indices, yellow_shader);
     
     Elenore::Object square(mesh, "Square", {0, 0, 0});
     

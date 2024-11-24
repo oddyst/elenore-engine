@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.0) # Checa a versão mínima do CMake.
+cmake_minimum_required(VERSION 3.30.0) # Checa a versão mínima do CMake.
 set(CMAKE_CXX_STANDARD 23) # Configura a versão do C++.
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # Se é necessário a versão padronizada do C++.
 set(CMAKE_CXX_EXTENSIONS OFF) # Desativa as extensões do C++.

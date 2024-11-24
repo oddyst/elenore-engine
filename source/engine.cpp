@@ -15,6 +15,9 @@ namespace Elenore
 {
     Engine::Engine(int window_width, int window_height, const char *window_title)
     {
+        glfwWindowHint(GLFW_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_VERSION_MINOR, 3);
+        
         if(!glfwInit())
         {
             const char *description;

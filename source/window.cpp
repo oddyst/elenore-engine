@@ -22,7 +22,6 @@ namespace Elenore
         {
             const char *description;
             std::cerr << "Error GLFW " << glfwGetError(&description) << "\n";
-            exit(1);
         }
         
         _main_window = glfwCreateWindow(window_width, window_height, window_title, nullptr, nullptr);
@@ -31,17 +30,15 @@ namespace Elenore
         {
             std::cerr << "Error while creating window.\n";
             glfwTerminate();
-            exit(1);
         }
         
         glfwMakeContextCurrent(_main_window);
-        
+        glfwSetFramebufferSizeCallback(_main_window, framebufferSizeCallback);
         
         if(glewInit() != GLEW_OK)
         {
             std::cerr << "Error GLEW -> " << glewGetErrorString(glewInit()) << "\n";
             glfwTerminate();
-            exit(1);
         }
     }
     
@@ -56,7 +53,12 @@ namespace Elenore
         glfwSwapBuffers(_main_window);
         glfwPollEvents();
     }
-    
+
+    void Window::framebufferSizeCallback(GLFWwindow *window, int w, int h)
+    {
+        glViewport(0, 0, w, h);
+    }
+
     Window::~Window()
     {
         glfwDestroyWindow(_main_window);

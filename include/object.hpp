@@ -8,9 +8,12 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
+#include <string>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/vec3.hpp>
 
 #include <mesh.hpp>
 
@@ -18,12 +21,14 @@ namespace Elenore
 {
     class Object
     {
-    private:
-        Mesh *_mesh;
-        const char *_name;
     public:
-        Object(Mesh *mesh, const char *object_name);
+        Object(Mesh *mesh, std::string object_name, glm::vec3 position);
         void draw();
+    private:
+        // Mesh *_mesh;
+        std::shared_ptr<Mesh>_mesh;
+        glm::vec3 _position;
+        std::string _name;
     };
 } // Elenore
 

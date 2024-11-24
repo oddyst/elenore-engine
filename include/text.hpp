@@ -3,11 +3,15 @@
 // File: text.hpp
 // Date: 2024-11-23
 
+// This file is obsolete.
+
 #ifndef TEXT_HPP
 #define TEXT_HPP
 
 #include <GL/glew.h>
 #include <iostream>
+#include <memory>
+#include <glm/vec3.hpp>
 
 #include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
@@ -25,7 +29,7 @@ namespace Elenore
          * @param position_y The vertical position of text.
          * @param text_size The size of text.
          */
-        Text(const char *text, int position_x, int position_y, unsigned int font_size, int red, int green, int blue);
+        Text(std::string *text, int position_x, int position_y, unsigned int font_size, int red, int green, int blue);
         /**
          * @brief Draw the text.
          */

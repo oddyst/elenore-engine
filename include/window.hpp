@@ -28,9 +28,10 @@ namespace Elenore
         GLFWwindow *getWindow() const { return _main_window; };
         
         /// @returns If the window should close.
-        int windowShouldClose() { return glfwWindowShouldClose(_main_window); }
+        int shouldClose() { return glfwWindowShouldClose(_main_window); }
         void beginDraw();
         void endDraw();
+        static void framebufferSizeCallback(GLFWwindow *window, int w, int h);
         ~Window();
     private:
         GLFWwindow *_main_window;

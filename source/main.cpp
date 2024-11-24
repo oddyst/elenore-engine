@@ -52,9 +52,9 @@ int main(void)
     
     Elenore::Mesh *mesh = new Elenore::Mesh(vertices, indices, yellow_shader);
     
-    Elenore::Object square(mesh, "Square");
+    Elenore::Object square(mesh, "Square", {0, 0, 0});
     
-    while(!window.windowShouldClose())
+    while(!window.shouldClose())
     {
         window.beginDraw();
         

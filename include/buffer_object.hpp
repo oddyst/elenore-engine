@@ -15,24 +15,33 @@
 
 namespace Buffer
 {
-    class VBO
+    class BufferObject
     {
     public:
-        VBO(std::vector<GLfloat>vertices);
-        void bind() const { glBindBuffer(GL_ARRAY_BUFFER, _vbo); }
-        void unbind() const { glBindBuffer(GL_ARRAY_BUFFER, 0); }
-        GLuint getVBO() { return _vbo; }
+        virtual void bind() = 0;
+        virtual void unbind() = 0;
+        virtual GLuint get() = 0;
+    };
+    
+    class VBO : BufferObject
+    {
+    public:
+        VBO(std::vector<GLfloat>&vertexData);
+        void bind() { glBindBuffer(GL_ARRAY_BUFFER, _vbo); }
+        void unbind() { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+        GLuint get() override { return _vbo; }
         ~VBO();
     private:
         GLuint _vbo;
     };
     
-    class EBO
+    class EBO : BufferObject
     {
     public:
-        EBO(std::vector<GLuint>indices);
-        void bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo); }
-        void unbind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); };
+        EBO(std::vector<GLuint>&indexData);
+        void bind() override { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo); }
+        void unbind() override { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); };
+        GLuint get() override { return _ebo; }
         ~EBO();
     private:
         GLuint _ebo;

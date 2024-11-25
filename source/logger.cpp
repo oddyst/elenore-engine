@@ -1,22 +1,22 @@
 // Author: oknauta
-// License: 
+// License:
 // File: logger.cpp
 // Date: 2024-11-24
 
-#include <logger.hpp>
 #include <iostream>
+#include <logger.hpp>
 
-namespace Logger
+namespace Log
 {
-    void log(const std::string message)
-    {
-        std::cout << "LOG: " << message << "\n";
-    }
+void info(const std::string message)
+{
+    std::cout << "INFO: " << message << "\n";
+}
 
-    void error(const std::string message)
-    {
-        std::cerr << "ERROR: " << message << "\n";
-    }
+void error(const std::string message)
+{
+    std::cerr << "ERROR: " << message << "\n";
+}
 
-    // Your code
-} // Logger
+// Your code
+} // namespace Log

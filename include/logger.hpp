@@ -8,13 +8,13 @@
 
 #include <string>
 
-namespace Logger
+namespace Log
 {
     
-    void log(const std::string message);
+    void info(const std::string message);
     
     void error(const std::string message);
     
-} // Logger
+} // Log
 
 #endif // LOGGER_HPP

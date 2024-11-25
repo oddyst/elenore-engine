@@ -29,7 +29,7 @@ namespace Elenore
          * @param position The object's location.
          */
         Object(std::shared_ptr<Mesh>mesh, std::string object_name, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f));
-        void draw();
+        void draw(const glm::mat4& view, const glm::mat4& projection);
         /// @brief Sets a new position.
         void setPosition(glm::vec3 position);
         /// @brief Sets a new rotation.

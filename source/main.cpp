@@ -17,11 +17,11 @@ int main(void)
     Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     Elenore::vertex vertices_triangle = {
-        0.0f,  1.0f,  0.0f, // First vertex
+        0.0f, 1.0f, 0.0f, // First vertex
 
         -1.0f, -1.0f, 0.0f, // Second vertex
 
-        1.0f,  -1.0f, 0.0f, // Third vertex
+        1.0f, -1.0f, 0.0f, // Third vertex
     };
 
     Elenore::index indices_triangle = {0, 1, 2};

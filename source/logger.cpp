@@ -8,15 +8,15 @@
 
 namespace Log
 {
-void info(const std::string message)
-{
-    std::cout << "INFO: " << message << "\n";
-}
+    void info(const std::string message)
+    {
+        std::cout << "INFO: " << message << "\n";
+    }
 
-void error(const std::string message)
-{
-    std::cerr << "ERROR: " << message << "\n";
-}
+    void error(const std::string message)
+    {
+        std::cerr << "ERROR: " << message << "\n";
+    }
 
-// Your code
+    // Your code
 } // namespace Log

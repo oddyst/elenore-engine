@@ -1,5 +1,5 @@
 // Author: oknauta
-// License: 
+// License:
 // File: text.hpp
 // Date: 2024-11-23
 
@@ -18,7 +18,7 @@
 
 namespace Elenore
 {
-    
+
     class Text
     {
     public:
@@ -34,14 +34,15 @@ namespace Elenore
          * @brief Draw the text.
          */
         void draw();
+
     private:
         void initFreetype();
         void loadFont(const char *font_path);
         int _font_size;
-        FT_Face _face; // Handle to freetype face object.
+        FT_Face _face;       // Handle to freetype face object.
         FT_Library _library; // Handle to freetype library.
     };
-    
+
 } // Elenore
 
 #endif // TEXT_HPP

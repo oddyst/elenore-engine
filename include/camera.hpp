@@ -1,5 +1,5 @@
 // Author: oknauta
-// License: 
+// License:
 // File: camera.hpp
 // Date: 2024-11-25
 
@@ -18,6 +18,7 @@ namespace Elenore
         glm::vec3 getPosition() { return _position; }
         glm::vec3 getUpVector() { return _up_vector; }
         glm::mat4 getViewMatrix() { return _view; }
+
     private:
         glm::mat4 _projection;
         glm::mat4 _view;

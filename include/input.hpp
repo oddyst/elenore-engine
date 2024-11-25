@@ -1,5 +1,5 @@
 // Author: oknauta
-// License: 
+// License:
 // File: input.hpp
 // Date: 2024-11-25
 
@@ -12,7 +12,6 @@ namespace Elenore
 {
     class InputManager
     {
-        
     };
 } // Elenore
 

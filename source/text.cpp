@@ -9,20 +9,20 @@
 
 namespace Elenore
 {
-Text::Text(std::string *text, int position_x, int position_y, unsigned int font_size, int red, int green, int blue)
-{
-}
+    Text::Text(std::string *text, int position_x, int position_y, unsigned int font_size, int red, int green, int blue)
+    {
+    }
 
-void Text::draw()
-{
-}
+    void Text::draw()
+    {
+    }
 
-void Text::initFreetype()
-{
-}
+    void Text::initFreetype()
+    {
+    }
 
-void Text::loadFont(const char *font_path)
-{
-}
+    void Text::loadFont(const char *font_path)
+    {
+    }
 
 } // namespace Elenore

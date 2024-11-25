@@ -1,5 +1,5 @@
 // Author: oknauta
-// License: 
+// License:
 // File: shader.hpp
 // Date: 2024-11-23
 
@@ -14,7 +14,6 @@
 #include <GLFW/glfw3.h>
 #include <glm/ext.hpp>
 
-
 namespace Elenore
 {
     class Shader
@@ -26,6 +25,7 @@ namespace Elenore
         GLint &getLocation() { return _location; };
         void use() { glUseProgram(_program_id); }
         ~Shader();
+
     private:
         GLuint _shader;
         GLint _location;
@@ -45,7 +45,7 @@ namespace Elenore
          */
         void compileCheck(GLuint program, GLboolean is_shader);
     };
-    
+
 } // Elenore
 
 #endif // SHADER_HPP

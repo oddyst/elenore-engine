@@ -9,14 +9,14 @@
 namespace Elenore
 {
 
-Camera::Camera(glm::vec3 position, float fov, float aspect_ratio, float near_plane, float far_plane, glm::vec3 target,
-               glm::vec3 up_vector)
-    : _position(position), _target(target), _up_vector(up_vector)
-{
-    Log::info("Starting camera...");
+    Camera::Camera(glm::vec3 position, float fov, float aspect_ratio, float near_plane, float far_plane, glm::vec3 target,
+                   glm::vec3 up_vector)
+        : _position(position), _target(target), _up_vector(up_vector)
+    {
+        Log::info("Starting camera...");
 
-    _projection = glm::perspective(glm::radians(fov), aspect_ratio, near_plane, far_plane);
-    _view = glm::lookAt(_position, _target, _up_vector);
-}
+        _projection = glm::perspective(glm::radians(fov), aspect_ratio, near_plane, far_plane);
+        _view = glm::lookAt(_position, _target, _up_vector);
+    }
 
 } // namespace Elenore

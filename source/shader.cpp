@@ -43,12 +43,12 @@ namespace Elenore
             Logger::log("Compiling fragment shader...");
         }
         
-        GLuint shader = glCreateShader(shader_type);
-        glShaderSource(shader, 1, &shader_source, nullptr);
-        glCompileShader(shader);
+        _shader = glCreateShader(shader_type);
+        glShaderSource(_shader, 1, &shader_source, nullptr);
+        glCompileShader(_shader);
         
-        compileCheck(shader, GL_TRUE);
-        return shader;
+        compileCheck(_shader, GL_TRUE);
+        return _shader;
     }
     
     
@@ -77,5 +77,11 @@ namespace Elenore
                 Logger::error(log);
             }
         }
+    }
+    
+    Shader::~Shader()
+    {
+        Logger::log("Deleting shader...");
+        glDeleteShader(_shader);
     }
 } // Elenore

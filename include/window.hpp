@@ -23,7 +23,7 @@ namespace Elenore
          * @param window_height The window's height
          * @param window_title The window's title
          */
-        Window(int window_width, int window_height, const char *window_title);
+        Window(int window_width, int window_height, const char *window_title = "GL Generic window");
         
         /// @returns The main window.
         GLFWwindow *getWindow() const { return _main_window; };

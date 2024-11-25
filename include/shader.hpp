@@ -24,7 +24,9 @@ namespace Elenore
         GLuint getProgram() const { return _program_id; }
         void setUniformMatrix4fv(const char *name, const glm::mat4 &matrix);
         GLint &getLocation() { return _location; };
+        ~Shader();
     private:
+        GLuint _shader;
         GLint _location;
         GLuint _program_id;
         /**

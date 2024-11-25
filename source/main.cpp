@@ -15,7 +15,7 @@ int main(void)
     
     
     
-    Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+    Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT);
     
     Elenore::vertices vertices_triangle =
     {

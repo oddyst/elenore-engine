@@ -64,6 +64,7 @@ namespace Elenore
 
     Window::~Window()
     {
+        Logger::log("Destroying window...");
         glfwDestroyWindow(_main_window);
         glfwTerminate();
     }

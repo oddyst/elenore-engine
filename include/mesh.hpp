@@ -26,7 +26,7 @@ namespace Elenore
          * @param vertices The mesh vertices that will be storaged
          * @param indices The mesh indices that will be storaged
          */
-        Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader shader);
+        Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader &shader);
         Shader &getShader() { return _shader; }
         std::vector<GLfloat>getVertices() const { return this->_vertices; };
         std::vector<GLuint>getIndices() const { return this->_indices; };

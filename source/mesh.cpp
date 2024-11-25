@@ -7,7 +7,7 @@
 
 namespace Elenore
 {
-    Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader shader) : _vertices(vertices), _indices(indices), _shader(shader)
+    Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader &shader) : _vertices(vertices), _indices(indices), _shader(shader)
     {
         
         _vao = std::make_unique<VAO>();

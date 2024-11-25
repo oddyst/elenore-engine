@@ -8,6 +8,7 @@
 #include <mesh.hpp>
 #include <object.hpp>
 // #include <text.hpp>
+#include <logger.hpp>
 
 int main(void)
 {
@@ -37,8 +38,9 @@ int main(void)
     const char *source_vertex_shader =
     "#version 330 core\n"
     "layout(location = 0) in vec3 aPos;\n"
+    "uniform mat4 model; \n"
     "void main() {\n"
-    "   gl_Position = vec4(aPos, 1.0);\n"
+    "gl_Position = model * vec4(aPos, 1.0);\n"
     "}\n";
     
     const char *source_fragment_shader =
@@ -54,11 +56,33 @@ int main(void)
     
     std::shared_ptr<Elenore::Mesh>mesh = std::make_unique<Elenore::Mesh>(vertices, indices, yellow_shader);
     
-    Elenore::Object square(mesh, "Square", {0, 0, 0});
+    Elenore::Object square(mesh, "Square", {1.0f, 0, 0});
+    
+    square.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    
+    square.setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+
+    float rotation_x, rotation_y, rotation_z;
+    float x = 0;
+    
+    glm::vec3 position;
     
     while(!window.shouldClose())
     {
         window.beginDraw();
+        
+        x += .001f;
+        
+        position = {x, 0.0f, 0.0f};
+        
+        rotation_x += .5f;
+        rotation_y += .5f;
+        rotation_z += .25f;
+        
+        Logger::log("Position " + std::to_string(position.x));
+        
+        square.setRotation(glm::vec3(rotation_x, rotation_y, rotation_z));
+        square.setPosition(position);
         
         square.draw();
         

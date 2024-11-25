@@ -12,6 +12,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/ext.hpp>
 
 
 namespace Elenore
@@ -21,6 +22,7 @@ namespace Elenore
     public:
         Shader(const char *vertex_path, const char *fragment_path);
         GLuint getProgram() const { return _program_id; }
+        void setUniformMatrix4fv(const char *name, const glm::mat4 &matrix);
     private:
         GLuint _program_id;
         /**

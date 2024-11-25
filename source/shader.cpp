@@ -4,6 +4,7 @@
 // Date: 2024-11-23
 
 #include <shader.hpp>
+#include <logger.hpp>
 
 namespace Elenore
 {
@@ -22,15 +23,24 @@ namespace Elenore
         compileCheck(_program_id, GL_FALSE);
     }
     
+    void Shader::setUniformMatrix4fv(const char *name, const glm::mat4 &matrix)
+    {
+        GLint location = glGetUniformLocation(_program_id, name);
+        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+    }
+    
     GLuint Shader::compileShader(GLenum shader_type, const char *shader_source)
     {
         if(shader_type == GL_VERTEX_SHADER)
         {
-            std::cout << "Compiling vertex shader...\n";
+            // std::cout << "Compiling vertex shader...\n";
+            Logger::log("Compiling vertex shader...");
+            
         }
         else if(shader_type == GL_FRAGMENT_SHADER)
         {
-            std::cout << "Compiling fragment shader...\n";
+            // std::cout << "Compiling fragment shader...\n";
+            Logger::log("Compiling fragment shader...");
         }
         
         GLuint shader = glCreateShader(shader_type);
@@ -40,6 +50,7 @@ namespace Elenore
         compileCheck(shader, GL_TRUE);
         return shader;
     }
+    
     
     void Shader::compileCheck(GLuint program, GLboolean is_shader)
     {
@@ -52,7 +63,8 @@ namespace Elenore
             if(!success)
             {
                 glGetShaderInfoLog(program, sizeof(log), nullptr, log);
-                std::cerr << "Error compiling shader.\n" << log;
+                // std::cerr << "Error compiling shader.\n" << log;
+                Logger::error(log);
             }
         }
         else
@@ -61,7 +73,8 @@ namespace Elenore
             if(!success)
             {
                 glGetShaderInfoLog(program, sizeof(log), nullptr, log);
-                std::cerr << "Error linking shader.\n" << log;
+                // std::cerr << "Error linking shader.\n" << log;
+                Logger::error(log);
             }
         }
     }

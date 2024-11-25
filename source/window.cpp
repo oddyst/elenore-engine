@@ -3,13 +3,8 @@
 // File: window.cpp
 // Date: 2024-11-22
 
-#include <iostream>
-#include <vector>
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <window.hpp>
+#include <logger.hpp>
 
 namespace Elenore
 {
@@ -21,14 +16,16 @@ namespace Elenore
         if(!glfwInit())
         {
             const char *description;
-            std::cerr << "Error GLFW " << glfwGetError(&description) << "\n";
+            glfwGetError(&description);
+            Logger::error(description);
         }
         
         _main_window = glfwCreateWindow(window_width, window_height, window_title, nullptr, nullptr);
         
         if(!_main_window)
         {
-            std::cerr << "Error while creating window.\n";
+            // std::cerr << "Error while creating window.\n";
+            Logger::error("Failed to create window.");
             glfwTerminate();
         }
         
@@ -37,7 +34,10 @@ namespace Elenore
         
         if(glewInit() != GLEW_OK)
         {
-            std::cerr << "Error GLEW -> " << glewGetErrorString(glewInit()) << "\n";
+            // std::cerr << "Error GLEW -> " << glewGetErrorString(glewInit()) << "\n";
+            
+            Logger::error("Failed to start glew.");
+            
             glfwTerminate();
         }
     }

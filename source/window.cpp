@@ -10,8 +10,11 @@ namespace Elenore
 {
     Window::Window(int window_width, int window_height, const char *window_title)
     {
+        Logger::log("Starting window...");
+        
         glfwWindowHint(GLFW_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
         
         if(!glfwInit())
         {
@@ -42,10 +45,10 @@ namespace Elenore
         }
     }
     
-    void Window::beginDraw()
+    void Window::beginDraw(const glm::vec4 &clear_color)
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
     
     void Window::endDraw()

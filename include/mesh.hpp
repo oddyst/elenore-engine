@@ -18,6 +18,9 @@
 
 namespace Elenore
 {
+    typedef std::vector<GLuint>indices;
+    typedef std::vector<GLfloat>vertices;
+    
     class Mesh
     {
     public:
@@ -32,9 +35,9 @@ namespace Elenore
         std::vector<GLuint>getIndices() const { return this->_indices; };
         GLuint getVAO() const { return _vao->getVAO(); }
     private:
-        std::unique_ptr<VAO> _vao;
-        std::unique_ptr<EBO> _ebo;
-        std::unique_ptr<VBO> _vbo;
+        std::unique_ptr<Buffer::VAO> _vao;
+        std::unique_ptr<Buffer::EBO> _ebo;
+        std::unique_ptr<Buffer::VBO> _vbo;
         
         // VAO *_vao;
         // VBO *_vbo;

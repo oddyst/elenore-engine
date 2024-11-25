@@ -27,18 +27,20 @@ namespace Elenore
         
         glm::mat4 model = getModelMatrix();
         
-        GLuint modelLoc = glGetUniformLocation(_mesh->getShader().getProgram(), "model");
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &model[0][0]);
+        // GLuint modelLoc = glGetUniformLocation(_mesh->getShader().getProgram(), "model");
+        // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &model[0][0]);
         
+        _mesh->getShader().setUniformMatrix4fv("model", model);
         
-        if (modelLoc == -1)
+        if (_mesh->getShader().getLocation() == -1)
         {
             Logger::error("Uniform 'model' not found in shader.");
         }
         else
         {
             glm::mat4 model = getModelMatrix();
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            
+            // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         }
 
         
@@ -67,11 +69,11 @@ namespace Elenore
     glm::mat4 Object::getModelMatrix()
     {
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, _position);
         model = glm::rotate(model, glm::radians(_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
         model = glm::rotate(model, glm::radians(_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::rotate(model, glm::radians(_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
         model = glm::scale(model, _scale);
+        model = glm::translate(model, _position);
         return model;
     }
 

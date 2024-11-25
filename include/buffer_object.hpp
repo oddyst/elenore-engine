@@ -13,7 +13,7 @@
 #include <GLFW/glfw3.h>
 
 
-namespace Elenore
+namespace Buffer
 {
     class VBO
     {

@@ -4,43 +4,38 @@
 // Date: 2024-11-19
 
 #include <window.hpp>
-#include <shader.hpp>
-#include <mesh.hpp>
 #include <object.hpp>
-// #include <text.hpp>
 #include <logger.hpp>
 
 int main(void)
 {
     const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 600;
-    const char *WINDOW_TITLE = "Elenore Engine";
+    const int WINDOW_HEIGHT = 800;
+    const char *WINDOW_TITLE = "GL Elenore Engine";
     
-    // Creating an window 
+    
+    
     Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
     
-    // Elenore::Text text("Hello, world!", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, 255, 255, 255);
-    
-    std::vector<GLfloat>vertices =
+    Elenore::vertices vertices_triangle =
     {
-        0.5f, 0.5f, 0.0f,
-        -0.5f, 0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f
+        0.0f, 1.0f, 0.0f,
+        -1.0f, -1.0f, 0.0f,
+        1.0f, -1.0f, 0.0f
     };
     
-    std::vector<GLuint>indices =
+    Elenore::indices indices_triangle =
     {
-        0, 1, 2,
-        0, 2, 3
+        0, 1, 2
     };
+    
     
     const char *source_vertex_shader =
     "#version 330 core\n"
     "layout(location = 0) in vec3 aPos;\n"
     "uniform mat4 model; \n"
     "void main() {\n"
-    "gl_Position = model * vec4(aPos, 1.0);\n"
+    "gl_Position = model * vec4(aPos, 2.0);\n"
     "}\n";
     
     const char *source_fragment_shader =
@@ -52,44 +47,130 @@ int main(void)
     
     Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);
     
-    // Elenore::Mesh *mesh = new Elenore::Mesh(vertices, indices, yellow_shader);
+    auto mesh = std::make_shared<Elenore::Mesh>(vertices_triangle, indices_triangle, yellow_shader);
     
-    std::shared_ptr<Elenore::Mesh>mesh = std::make_unique<Elenore::Mesh>(vertices, indices, yellow_shader);
+    Elenore::Object triangle(mesh, "Triangle", glm::vec3(0.0f,0.0f,0.0f));
     
-    Elenore::Object square(mesh, "Square", {1.0f, 0, 0});
+    // triangle.setScale(glm::vec3(1.0f/4.0f, 1.0f/2.0f, 1.0f/2.0f));
     
-    square.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    
-    square.setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-
-    float rotation_x, rotation_y, rotation_z;
-    float x = 0;
-    
-    glm::vec3 position;
+    float rotation = 0;
     
     while(!window.shouldClose())
     {
         window.beginDraw();
         
-        x += .001f;
+        rotation += 0.1f;
         
-        position = {x, 0.0f, 0.0f};
+        triangle.setRotation(glm::vec3(rotation, 0, 0));
         
-        rotation_x += .5f;
-        rotation_y += .5f;
-        rotation_z += .25f;
-        
-        Logger::log("Position " + std::to_string(position.x));
-        
-        square.setRotation(glm::vec3(rotation_x, rotation_y, rotation_z));
-        square.setPosition(position);
-        
-        square.draw();
+        triangle.draw();
         
         window.endDraw();
     }
     
-    // delete mesh;
-    
     return 0;
 }
+
+
+// int main(void)
+// {
+//     const int WINDOW_WIDTH = 800;
+//     const int WINDOW_HEIGHT = 600;
+//     const char *WINDOW_TITLE = "Elenore Engine";
+    
+//     // Creating an window 
+//     Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
+    
+//     // Elenore::Text text("Hello, world!", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, 255, 255, 255);
+    
+//     std::vector<GLfloat>vertices =
+//     {
+//         0.5f, 0.5f, 0.5f,
+//         -0.5f, 0.5f, 0.5f,
+//         -0.5f, -0.5f, 0.5f,
+//         0.5f, -0.5f, 0.5f,
+        
+//         0.5f, 0.5f, -0.5f,
+//         -0.5f, 0.5f, -0.5f,
+//         -0.5f, -0.5f, -0.5f,
+//         0.5f, -0.5f, -0.5f
+//     };
+    
+ 
+//     std::vector<GLuint> indices =
+//     {
+//         // Frente
+//         0, 1, 2,
+//         0, 2, 3,
+
+//         // Trás
+//         4, 5, 6,
+//         4, 6, 7,
+
+//         // Esquerda
+//         1, 5, 6,
+//         1, 6, 2,
+
+//         // Direita
+//         0, 4, 7,
+//         0, 7, 3,
+
+//         // Topo
+//         0, 1, 5,
+//         0, 5, 4,
+
+//         // Base
+//         2, 6, 7,
+//         2, 7, 3
+//     };
+    
+//     const char *source_vertex_shader =
+//     "#version 330 core\n"
+//     "layout(location = 0) in vec3 aPos;\n"
+//     "uniform mat4 model; \n"
+//     "void main() {\n"
+//     "gl_Position = model * vec4(aPos, 2.0);\n"
+//     "}\n";
+    
+//     const char *source_fragment_shader =
+//     "#version 330 core\n"
+//     "out vec4 FragColor;\n"
+//     "void main()\n"
+//     "{FragColor = vec4(1.0, 1.0, 0.0, 1.0);}\n";
+
+    
+//     Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);
+    
+//     // Elenore::Mesh *mesh = new Elenore::Mesh(vertices, indices, yellow_shader);
+    
+//     // std::shared_ptr<Elenore::Mesh>mesh = std::make_unique<Elenore::Mesh>(vertices, indices, yellow_shader);
+    
+//     auto mesh = std::make_shared<Elenore::Mesh>(vertices, indices, yellow_shader);
+    
+//     Elenore::Object square(mesh, "Square", {1.0f, 0, 0});
+    
+//     square.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+    
+//     square.setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+
+//     float rotation_x, rotation_y, rotation_z;
+    
+//     glm::vec4 background_color = {0.1f, 0.1f, 0.1f, 1.0f};
+    
+//     while(!window.shouldClose())
+//     {
+//         window.beginDraw(background_color);
+        
+//         rotation_z += .5f;
+        
+//         square.setRotation(glm::vec3(1.25f, 1.25f, rotation_z));
+        
+//         square.draw();
+        
+//         window.endDraw();
+//     }
+    
+//     // delete mesh;
+    
+//     return 0;
+// }

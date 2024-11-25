@@ -11,6 +11,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/vec4.hpp>
 
 namespace Elenore
 {
@@ -29,11 +30,11 @@ namespace Elenore
         
         /// @returns If the window should close.
         int shouldClose() { return glfwWindowShouldClose(_main_window); }
-        void beginDraw();
+        void beginDraw(const glm::vec4 &clear_color = {0.1f, 0.1f, 0.1f, 1.0f});
         void endDraw();
-        static void framebufferSizeCallback(GLFWwindow *window, int w, int h);
         ~Window();
     private:
+        static void framebufferSizeCallback(GLFWwindow *window, int w, int h);
         GLFWwindow *_main_window;
     };
 } // Elenore

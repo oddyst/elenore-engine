@@ -10,9 +10,9 @@ namespace Elenore
     Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader &shader) : _vertices(vertices), _indices(indices), _shader(shader)
     {
         
-        _vao = std::make_unique<VAO>();
-        _vbo = std::make_unique<VBO>(_vertices);
-        _ebo = std::make_unique<EBO>(_indices);
+        _vao = std::make_unique<Buffer::VAO>();
+        _vbo = std::make_unique<Buffer::VBO>(_vertices);
+        _ebo = std::make_unique<Buffer::EBO>(_indices);
         
         // _vao = new VAO();
         // _vbo = new VBO(_vertices); // This makes memory leak. As a good practice, get away from that.

@@ -25,8 +25,8 @@ namespace Elenore
     
     void Shader::setUniformMatrix4fv(const char *name, const glm::mat4 &matrix)
     {
-        GLint location = glGetUniformLocation(_program_id, name);
-        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+        _location = glGetUniformLocation(_program_id, name);
+        glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(matrix));
     }
     
     GLuint Shader::compileShader(GLenum shader_type, const char *shader_source)

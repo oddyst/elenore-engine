@@ -5,7 +5,7 @@
 
 #include <buffer_object.hpp>
 
-namespace Elenore
+namespace Buffer
 {
     VBO::VBO(std::vector<GLfloat>vertices)
     {

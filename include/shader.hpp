@@ -23,7 +23,9 @@ namespace Elenore
         Shader(const char *vertex_path, const char *fragment_path);
         GLuint getProgram() const { return _program_id; }
         void setUniformMatrix4fv(const char *name, const glm::mat4 &matrix);
+        GLint &getLocation() { return _location; };
     private:
+        GLint _location;
         GLuint _program_id;
         /**
          * @brief Compile or link a shader to a program.

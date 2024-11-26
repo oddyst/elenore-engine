@@ -1,86 +1,95 @@
 // Author: oknauta
-// License: 
+// License:
 // File: shader.cpp
 // Date: 2024-11-23
 
+#include <logger.hpp>
 #include <shader.hpp>
 
-namespace Elenore
+#include <glm/ext.hpp>
+
+namespace Elenore::Graphics
 {
-    
-    Shader::Shader(const char *source_vertex_shader, const char *source_fragment_shader) : _source_vertex_shader(source_vertex_shader), _source_fragment_shader(source_fragment_shader)
+    Shader::Shader(const char *vertex_path, const char *fragment_path)
     {
-        compileShader(GL_VERTEX_SHADER, _vertex_shader, source_vertex_shader, GL_TRUE);
-        compileShader(GL_FRAGMENT_SHADER, _fragment_shader, source_fragment_shader, GL_TRUE);
-        
-        // _vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-        // _fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-        
-        // glShaderSource(_vertex_shader, 1, &_source_vertex_shader, nullptr);
-        // glCompileShader(_vertex_shader);
-        // checkShaderCompile(_vertex_shader, true);
-        
-        // glShaderSource(_fragment_shader, 1, &_source_fragment_shader, nullptr);
-        // glCompileShader(_fragment_shader);
-        // checkShaderCompile(_fragment_shader, true);
-        
+        GLuint vertex_shader = compileShader(GL_VERTEX_SHADER, vertex_path);
+        GLuint fragment_shader = compileShader(GL_FRAGMENT_SHADER, fragment_path);
+
+        // compileShader(GL_VERTEX_SHADER, vertex_shader, vertex_path, GL_TRUE);
+        // compileShader(GL_FRAGMENT_SHADER, fragment_shader, fragment_path, GL_TRUE);
+
         _program_id = glCreateProgram();
-        glAttachShader(_program_id, _vertex_shader);
-        glAttachShader(_program_id, _fragment_shader);
+        glAttachShader(_program_id, vertex_shader);
+        glAttachShader(_program_id, fragment_shader);
         glLinkProgram(_program_id);
-        checkShaderCompile(_program_id, false);
+        compileCheck(_program_id, GL_FALSE);
     }
-    
-    void Shader::compileShader(GLenum shader_type, GLuint shader, const char *shader_source, GLboolean is_shader)
+
+    void Shader::setUniform(const char *name, const glm::mat4 &matrix)
     {
-        std::cout << "Compiling shader...\n";
-        
-        shader = glCreateShader(shader_type);
-        
-        glShaderSource(shader, 1, &shader_source, nullptr);
-        glCompileShader(shader);
-        checkShaderCompile(shader, is_shader);
+        _location = glGetUniformLocation(_program_id, name);
+
+        if (_location == -1)
+        {
+            Log::error("Uniform not founded: " + std::string(name));
+            return;
+        }
+
+        glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(matrix));
     }
-    
-    void Shader::checkShaderCompile(GLuint program_id, bool is_shader)
+
+    GLuint Shader::compileShader(GLenum shader_type, const char *shader_source)
+    {
+        GLuint _shader;
+        if (shader_type == GL_VERTEX_SHADER)
+        {
+            // std::cout << "Compiling vertex shader...\n";
+            Log::info("Compiling vertex shader...");
+        }
+        else if (shader_type == GL_FRAGMENT_SHADER)
+        {
+            // std::cout << "Compiling fragment shader...\n";
+            Log::info("Compiling fragment shader...");
+        }
+
+        _shader = glCreateShader(shader_type);
+        glShaderSource(_shader, 1, &shader_source, nullptr);
+        glCompileShader(_shader);
+
+        compileCheck(_shader, GL_TRUE);
+        return _shader;
+    }
+
+    void Shader::compileCheck(GLuint program, GLboolean is_shader)
     {
         GLint success;
-        GLchar info[1024];
-        
-        if(is_shader)
+        GLchar log[1024];
+
+        if (is_shader)
         {
-            glGetShaderiv(program_id, GL_COMPILE_STATUS, &success);
-            if(!success)
+            glGetShaderiv(program, GL_COMPILE_STATUS, &success);
+            if (!success)
             {
-                glGetShaderInfoLog(program_id, sizeof(info), nullptr, info);
-                
-                std::cerr << "Error while compiling shader. -> " << (is_shader ? "SHADER" : "PROGRAM") << "\n" << info;
-            }
-            else
-            {
-                std::cout << "Successfuly shader compiling.\n";
+                glGetShaderInfoLog(program, sizeof(log), nullptr, log);
+                // std::cerr << "Error compiling shader.\n" << log;
+                Log::error(log);
             }
         }
         else
         {
-            glGetProgramiv(program_id, GL_LINK_STATUS, &success);
-            if(!success)
+            glGetProgramiv(program, GL_LINK_STATUS, &success);
+            if (!success)
             {
-                glGetShaderInfoLog(program_id, sizeof(info), nullptr, info);
-                std::cerr << "Error linking shader.\n" << info;
-            }
-            else
-            {
-                std::cout << "Successfuly shader linking.\n";
+                glGetShaderInfoLog(program, sizeof(log), nullptr, log);
+                // std::cerr << "Error linking shader.\n" << log;
+                Log::error(log);
             }
         }
     }
-    
+
     Shader::~Shader()
     {
-        glDeleteShader(_fragment_shader);
-        glDeleteShader(_vertex_shader);
+        Log::info("Deleting shader...");
         glDeleteProgram(_program_id);
-        
     }
-} // Elenore
+} // Elenore::Graphics

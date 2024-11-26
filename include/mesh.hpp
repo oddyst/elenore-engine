@@ -1,5 +1,5 @@
 // Author: oknauta
-// License: 
+// License:
 // File: mesh.hpp
 // Date: 2024-11-23
 
@@ -7,17 +7,24 @@
 #define MESH_HPP
 
 #include <iostream>
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <shader.hpp>
 #include <buffer_object.hpp>
+#include <shader.hpp>
 
-namespace Elenore
+namespace Elenore::Data
 {
+    typedef std::vector<GLfloat> vertex;
+    typedef std::vector<GLuint> index;
+};
+
+namespace Elenore::Graphics
+{
+
     class Mesh
     {
     public:
@@ -26,24 +33,37 @@ namespace Elenore
          * @param vertices The mesh vertices that will be storaged
          * @param indices The mesh indices that will be storaged
          */
-        Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader shader);
-        inline Shader getShader() const { return _shader; }
-        inline std::vector<GLfloat>getVertices() const { return this->_vertices; };
-        inline std::vector<GLuint>getIndices() const { return this->_indices; };
-        inline GLuint getVAO() const { return _vao->getVAO(); }
+        Mesh(Data::vertex &vertices, Data::index &indices, Shader &shader);
+        Shader &getShader()
+        {
+            return _shader;
+        }
+        std::vector<GLfloat> getVertices() const
+        {
+            return this->_vertices;
+        };
+        std::vector<GLuint> getIndices() const
+        {
+            return this->_indices;
+        };
+        GLuint getVAO() const
+        {
+            return _vao->get();
+        }
+
     private:
-        std::unique_ptr<VAO> _vao;
-        std::unique_ptr<EBO> _ebo;
-        std::unique_ptr<VBO> _vbo;
-        
+        std::unique_ptr<Buffer::VAO> _vao;
+        std::unique_ptr<Buffer::EBO> _ebo;
+        std::unique_ptr<Buffer::VBO> _vbo;
+
         // VAO *_vao;
         // VBO *_vbo;
         // EBO *_ebo;
-        
-        std::vector<GLuint>_indices;
-        std::vector<GLfloat>_vertices;
+
+        std::vector<GLuint> _indices;
+        std::vector<GLfloat> _vertices;
         Shader _shader;
     };
-} // Elenore
+} // Elenore::Graphics
 
 #endif // MESH_HPP

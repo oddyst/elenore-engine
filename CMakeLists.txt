@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31.0) # Checa a versão mínima do CMake.
+cmake_minimum_required(VERSION 3.30.0) # Checa a versão mínima do CMake.
 set(CMAKE_CXX_STANDARD 23) # Configura a versão do C++.
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # Se é necessário a versão padronizada do C++.
 set(CMAKE_CXX_EXTENSIONS OFF) # Desativa as extensões do C++.
@@ -9,7 +9,7 @@ pkg_check_modules(FREETYPE REQUIRED freetype2) # Procura no sistema o freetype2.
 
 project(elenore-engine VERSION 0.1.0 LANGUAGES CXX) # Configurações do projeto.
 
-add_library(elenore SHARED source/buffer_object.cpp source/engine.cpp source/mesh.cpp source/object.cpp source/shader.cpp source/text.cpp) # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
+add_library(elenore SHARED source/buffer_object.cpp source/window.cpp source/mesh.cpp source/object2d.cpp source/object3d.cpp source/shader.cpp source/text.cpp source/logger.cpp source/camera.cpp) # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
 
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 

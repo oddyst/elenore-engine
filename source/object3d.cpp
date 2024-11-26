@@ -19,20 +19,19 @@ namespace Elenore::Entity
     {
         if (!_mesh)
         {
-            // std::cerr << "ERROR: mesh didn't initialized.\n";
             Log::error("Mesh didn't initialize.");
         }
-        // glUseProgram(_mesh->getShader().getProgram());
-        _mesh->getShader().use();
 
-        // GLuint modelLoc = glGetUniformLocation(_mesh->getShader().getProgram(), "model");
-        // glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &model[0][0]);
+        _mesh->getShader().use();
 
         glm::mat4 model = getModelMatrix();
 
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
         _mesh->getShader().setUniform("model", model);
-        // _mesh->getShader().setUniform("view", view);
-        // _mesh->getShader().setUniform("projection", projection);
+        _mesh->getShader().setUniform("view", view);
+        _mesh->getShader().setUniform("projection", projection);
 
         // Drawing the frame
         Buffer::drawElements(_mesh->getVAO(), _mesh->getIndices());
@@ -63,4 +62,4 @@ namespace Elenore::Entity
         model = glm::scale(model, _scale);
         return model;
     }
-} // Elenore::Entity
+} // namespace Elenore::Entity

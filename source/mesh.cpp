@@ -11,16 +11,16 @@ namespace Elenore::Graphics
         : _vertices(vertices), _indices(indices), _shader(shader)
     {
 
-        _vao = std::make_unique<Buffer::VAO>();
         _vbo = std::make_unique<Buffer::VBO>(_vertices);
+        _vao = std::make_unique<Buffer::VAO>();
         _ebo = std::make_unique<Buffer::EBO>(_indices);
 
         // _vao = new VAO();
         // _vbo = new VBO(_vertices); // This makes memory leak. As a good practice, get away from that.
         // _ebo = new EBO(_indices);
 
-        _vao->bind();
         _vbo->bind();
+        _vao->bind();
         _ebo->bind();
 
         // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);

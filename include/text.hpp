@@ -3,20 +3,18 @@
 // File: text.hpp
 // Date: 2024-11-23
 
-// This file is obsolete.
-
 #ifndef TEXT_HPP
 #define TEXT_HPP
 
 #include <GL/glew.h>
+#include <glm/vec3.hpp>
 #include <iostream>
 #include <memory>
-#include <glm/vec3.hpp>
 
 #include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
 
-namespace Elenore
+namespace Elenore::UI
 {
 
     class Text
@@ -43,6 +41,6 @@ namespace Elenore
         FT_Library _library; // Handle to freetype library.
     };
 
-} // Elenore
+} // namespace Elenore::UI
 
 #endif // TEXT_HPP

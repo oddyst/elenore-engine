@@ -18,11 +18,17 @@ namespace Elenore::Entity
         glm::vec3 getPosition() { return _position; }
         glm::vec3 getUpVector() { return _up_vector; }
         glm::mat4 getViewMatrix() { return _view; }
+        
+        void setPosition(glm::vec3 &position);
+        void setRotation(glm::vec3 &rotation);
+        
+        void updateView();
 
     private:
         glm::mat4 _projection;
         glm::mat4 _view;
         glm::vec3 _position;
+        glm::vec3 _rotation;
         glm::vec3 _up_vector;
         glm::vec3 _target;
     };

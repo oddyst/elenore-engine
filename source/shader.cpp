@@ -31,7 +31,7 @@ namespace Elenore::Graphics
 
         if (_location == -1)
         {
-            Log::error("Uniform not founded: " + std::string(name));
+            Log::error("Uniform not found: " + std::string(name));
             return;
         }
 

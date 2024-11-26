@@ -21,6 +21,8 @@ namespace Elenore::Buffer
         virtual GLuint get() = 0;
     };
 
+
+    /// @brief Creates a vertex buffer object to use with shaders.
     class VBO : bufferObject
     {
     public:
@@ -33,7 +35,8 @@ namespace Elenore::Buffer
     private:
         GLuint _data;
     };
-
+    
+    /// @brief Creates a element buffer object to use with shaders.
     class EBO : bufferObject
     {
     public:
@@ -47,6 +50,7 @@ namespace Elenore::Buffer
         GLuint _data;
     };
 
+    /// @brief Creates a vertex array object to use with shaders.
     class VAO
     {
     public:

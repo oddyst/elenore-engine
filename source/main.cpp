@@ -17,9 +17,9 @@ int main(void)
     Elenore::Data::vertex vertices{
 
         // Position      // Colors
-        .0f, .5f, 0.0f, 1.0f, 0.0f, 0.0f, // RED
-        -.5, -.5, 0.0f, 0.0f, 1.0f, 0.0f, // GREEN
-        0.5, -.5, 0.0f, 0.0f, 0.0f, 1.0f};
+        .0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,  // RED
+        -1.0, -1.0, 0.0f, 0.0f, 1.0f, 0.0f, // GREEN
+        1.0, -1.0, 0.0f, 0.0f, 0.0f, 1.0f};
 
     Elenore::Data::index indices{
         0, 1, 2};
@@ -32,11 +32,14 @@ layout(location = 0) in vec3 position;
 layout(location = 1) in vec3 color;
 out vec3 vertex_color;
 
+uniform mat4 projection;
+uniform mat4 view;
+
 uniform mat4 model;
 
 void main()
 {
-    gl_Position = model * vec4(position, 1.0);
+    gl_Position = projection * view * model * vec4(position, 1.0);
     vertex_color = color;
 }
 
@@ -60,14 +63,10 @@ void main()
 
     Elenore::Entity::Object3D object(mesh, "Object");
 
-    int x = 0;
-
     while (!main_window.shouldClose())
     {
         main_window.beginDraw();
-        ++x;
         object.draw();
-        object.setRotation(glm::vec3(0, 0, x));
         main_window.endDraw();
     }
 

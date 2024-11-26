@@ -18,8 +18,8 @@
 
 namespace Elenore::Data
 {
-    typedef std::vector<GLuint> index;
     typedef std::vector<GLfloat> vertex;
+    typedef std::vector<GLuint> index;
 };
 
 namespace Elenore::Graphics
@@ -33,7 +33,7 @@ namespace Elenore::Graphics
          * @param vertices The mesh vertices that will be storaged
          * @param indices The mesh indices that will be storaged
          */
-        Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader &shader);
+        Mesh(Data::vertex &vertices, Data::index &indices, Shader &shader);
         Shader &getShader()
         {
             return _shader;

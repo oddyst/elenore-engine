@@ -16,9 +16,12 @@ namespace Elenore::Core
 
         glfwWindowHint(GLFW_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
+        glEnable(GL_DEBUG_OUTPUT);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+        glEnable(GL_MULTISAMPLE);
 
         if (!glfwInit())
         {

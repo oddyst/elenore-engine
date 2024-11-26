@@ -28,11 +28,19 @@ namespace Elenore::Graphics
     void Shader::setUniform(const char *name, const glm::mat4 &matrix)
     {
         _location = glGetUniformLocation(_program_id, name);
+
+        if (_location == -1)
+        {
+            Log::error("Uniform not founded: " + std::string(name));
+            return;
+        }
+
         glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(matrix));
     }
 
     GLuint Shader::compileShader(GLenum shader_type, const char *shader_source)
     {
+        GLuint _shader;
         if (shader_type == GL_VERTEX_SHADER)
         {
             // std::cout << "Compiling vertex shader...\n";
@@ -82,6 +90,6 @@ namespace Elenore::Graphics
     Shader::~Shader()
     {
         Log::info("Deleting shader...");
-        glDeleteShader(_shader);
+        glDeleteProgram(_program_id);
     }
 } // Elenore::Graphics

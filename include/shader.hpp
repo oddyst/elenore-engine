@@ -15,15 +15,38 @@ namespace Elenore::Graphics
     class Shader
     {
     public:
-        Shader(const char *vertex_path, const char *fragment_path);
+        /**
+         * @brief Creates a shader to use in mesh.
+         * @param vertex_shader_source Use your vertex shader here.
+         * @param fragment_shader_source Use your fragment shader here.
+         */
+        Shader(const char *vertex_shader_source, const char *fragment_shader_source);
+        /**
+         * @brief Obtain the shader program id.
+         * @return `_program_id`
+         */
         GLuint getProgram() const { return _program_id; }
+        /**
+         * @brief Sets the uniform shader for transformations.
+         * @param name The uniform's name.
+         * @param matrix The matrix.
+         */
         void setUniform(const char *name, const glm::mat4 &matrix);
+
+        /**
+         * @brief Gets the location.
+         * @return `_location`
+         */
         GLint &getLocation() { return _location; };
+
+        /**
+         * @brief Use the shader.
+         */
         void use() { glUseProgram(_program_id); }
         ~Shader();
 
     private:
-        GLuint _shader;
+        
         GLint _location;
         GLuint _program_id;
         /**

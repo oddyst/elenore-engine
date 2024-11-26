@@ -5,7 +5,7 @@
 
 #include <mesh.hpp>
 
-namespace Elenore
+namespace Elenore::Graphics
 {
     Mesh::Mesh(std::vector<GLfloat> vertices, std::vector<GLuint> indices, Shader &shader)
         : _vertices(vertices), _indices(indices), _shader(shader)
@@ -23,11 +23,13 @@ namespace Elenore
         _vbo->bind();
         _ebo->bind();
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-        glEnableVertexAttribArray(0);
+        // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+        // glEnableVertexAttribArray(0);
+
+        Buffer::setupVertexAttrib(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
         _vao->unbind();
         _vbo->unbind();
         _ebo->unbind();
     }
-} // namespace Elenore
+} // Elenore::Graphics

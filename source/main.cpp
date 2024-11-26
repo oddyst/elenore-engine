@@ -5,26 +5,14 @@
 
 #include <camera.hpp>
 #include <logger.hpp>
-#include <object.hpp>
+#include <memory>
+#include <object2d.hpp>
+#include <object3d.hpp>
 #include <window.hpp>
 
 int main(void)
 {
-    const int WINDOW_WIDTH = 800;
-    const int WINDOW_HEIGHT = 800;
-    const char *WINDOW_TITLE = "GL Elenore Engine";
-
-    Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    Elenore::vertex vertices_triangle = {
-        0.0f, 1.0f, 0.0f, // First vertex
-
-        -1.0f, -1.0f, 0.0f, // Second vertex
-
-        1.0f, -1.0f, 0.0f, // Third vertex
-    };
-
-    Elenore::index indices_triangle = {0, 1, 2};
+    Elenore::Core::Window main_window(800, 800);
 
     const char *source_vertex_shader = "#version 330 core\n"
                                        "layout(location = 0) in vec3 aPos;\n"
@@ -40,28 +28,97 @@ int main(void)
                                          "void main()\n"
                                          "{FragColor = vec4(1.0, 1.0, 0.0, 1.0);}\n";
 
-    glm::vec3 camera_position{0.0f, 0.0f, 0.0f};
-    glm::vec3 camera_target{0.0f, 0.0f, 0.0f};
-    float camera_fov{45.0f};
+    Elenore::Graphics::Shader shader(source_vertex_shader, source_fragment_shader);
 
-    Elenore::Camera camera(camera_position, camera_fov, float(WINDOW_WIDTH) / float(WINDOW_HEIGHT), 0.1f, 100.0f,
-                           camera_target);
+    // Elenore::Entity::Object2D triangle("Triangle");
 
-    Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);
+    Elenore::Data::vertex vertices{
+        0.5f, 0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f};
 
-    auto mesh = std::make_shared<Elenore::Mesh>(vertices_triangle, indices_triangle, yellow_shader);
+    Elenore::Data::index indices{
+        0, 1, 2};
 
-    Elenore::Object triangle(mesh, "Triangle", glm::vec3(0.0f, 0.0f, 0.0f));
+    auto mesh = std::make_shared<Elenore::Graphics::Mesh>(vertices, indices, shader);
 
-    while (!window.shouldClose())
+    Elenore::Entity::Object3D square(mesh, "aaa");
+
+    while (!main_window.shouldClose())
     {
-        window.beginDraw();
-        triangle.draw(camera.getViewMatrix(), camera.getProjectionMatrix());
-        window.endDraw();
+        main_window.beginDraw();
+        square.draw();
+        // triangle.draw();
+        main_window.endDraw();
     }
 
     return 0;
 }
+
+// int main(void)
+// {
+//     const int WINDOW_WIDTH = 800;
+//     const int WINDOW_HEIGHT = 800;
+//     const char *WINDOW_TITLE = "GL Elenore Engine";
+
+//     Elenore::Window window(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+//     Elenore::vertex vertices_triangle = {
+//         0.0f, 1.0f, 0.0f, // First vertex
+
+//         -1.0f, -1.0f, 0.0f, // Second vertex
+
+//         1.0f, -1.0f, 0.0f, // Third vertex
+//     };
+
+//     Elenore::index indices_triangle = {0, 1, 2};
+
+//     const char *source_vertex_shader = "#version 330 core\n"
+//                                        "layout(location = 0) in vec3 aPos;\n"
+//                                        "uniform mat4 model; \n"
+//                                        "uniform mat4 view; \n"
+//                                        "uniform mat4 projection;"
+//                                        "void main() {\n"
+//                                        "gl_Position = /*projection * view * */ model * vec4(aPos, 1.0);\n"
+//                                        "}\n";
+
+//     const char *source_fragment_shader = "#version 330 core\n"
+//                                          "out vec4 FragColor;\n"
+//                                          "void main()\n"
+//                                          "{FragColor = vec4(1.0, 1.0, 0.0, 1.0);}\n";
+
+//     glm::vec3 camera_position{0.0f, 0.0f, 0.0f};
+//     glm::vec3 camera_target{0.0f, 0.0f, 0.0f};
+//     float camera_fov{45.0f};
+
+//     Elenore::Camera3D camera(camera_position, camera_fov, float(WINDOW_WIDTH) / float(WINDOW_HEIGHT), 0.1f, 100.0f,
+//                              camera_target);
+
+//     Elenore::Shader yellow_shader(source_vertex_shader, source_fragment_shader);
+
+//     auto mesh = std::make_shared<Elenore::Mesh>(vertices_triangle, indices_triangle, yellow_shader);
+
+//     Elenore::Object3D triangle(mesh, "Triangle", glm::vec3(0.0f, 0.0f, 0.0f));
+
+//     float rotation = 0.0f;
+
+//     triangle.setScale(glm::vec3(1.0f / 2.0f, 1.0f / 2.0f, 1.0f / 2.0f));
+
+//     Elenore::Object3D triangle_2(mesh, "Triangle 2", glm::vec3(0.1f, 0.1f, 0.1f));
+
+//     while (!window.shouldClose())
+//     {
+//         window.beginDraw();
+//         triangle.draw();
+
+//         rotation += 0.5f;
+
+//         triangle.setRotation(glm::vec3(rotation, rotation, 0));
+//         window.endDraw();
+//     }
+
+//     return 0;
+// }
 
 // int main(void)
 // {

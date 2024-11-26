@@ -13,15 +13,17 @@
 #include <GLFW/glfw3.h>
 #include <glm/vec4.hpp>
 
-namespace Elenore
+#include <camera.hpp>
+
+namespace Elenore::Core
 {
     class Window
     {
     public:
         /**
-         * @param window_width The window's width
-         * @param window_height The window's height
-         * @param window_title The window's title
+         * @param window_width The window's width.
+         * @param window_height The window's height.
+         * @param window_title The window's title that will be showed up on the window.
          */
         Window(int window_width, int window_height, const char *window_title = "GL Generic window");
 
@@ -38,6 +40,6 @@ namespace Elenore
         static void framebufferSizeCallback(GLFWwindow *window, int w, int h);
         GLFWwindow *_main_window;
     };
-} // Elenore
+} // Elenore::Core
 
 #endif // ENGINE_HPP

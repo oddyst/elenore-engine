@@ -6,7 +6,9 @@
 #include <logger.hpp>
 #include <window.hpp>
 
-namespace Elenore
+#include <glm/ext.hpp>
+
+namespace Elenore::Core
 {
     Window::Window(int window_width, int window_height, const char *window_title)
     {
@@ -71,4 +73,4 @@ namespace Elenore
         glfwDestroyWindow(_main_window);
         glfwTerminate();
     }
-} // namespace Elenore
+} // Elenore::Core

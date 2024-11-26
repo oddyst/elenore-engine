@@ -16,10 +16,14 @@
 #include <buffer_object.hpp>
 #include <shader.hpp>
 
-namespace Elenore
+namespace Elenore::Data
 {
     typedef std::vector<GLuint> index;
     typedef std::vector<GLfloat> vertex;
+};
+
+namespace Elenore::Graphics
+{
 
     class Mesh
     {
@@ -44,7 +48,7 @@ namespace Elenore
         };
         GLuint getVAO() const
         {
-            return _vao->getVAO();
+            return _vao->get();
         }
 
     private:
@@ -60,6 +64,6 @@ namespace Elenore
         std::vector<GLfloat> _vertices;
         Shader _shader;
     };
-} // namespace Elenore
+} // Elenore::Graphics
 
 #endif // MESH_HPP

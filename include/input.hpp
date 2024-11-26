@@ -8,11 +8,11 @@
 
 #include <GLFW/glfw3.h>
 
-namespace Elenore
+namespace Elenore::Input
 {
     class InputManager
     {
     };
-} // Elenore
+} // Elenore::Input
 
 #endif // INPUT_HPP

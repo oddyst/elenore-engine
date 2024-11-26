@@ -6,7 +6,7 @@
 #include <iostream>
 #include <logger.hpp>
 
-namespace Log
+namespace Elenore::Log
 {
     void info(const std::string message)
     {
@@ -18,5 +18,4 @@ namespace Log
         std::cerr << "ERROR: " << message << "\n";
     }
 
-    // Your code
-} // namespace Log
+} // Elenore::Log

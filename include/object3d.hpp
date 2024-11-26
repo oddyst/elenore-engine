@@ -1,15 +1,15 @@
 // Author: oknauta
 // License:
-// File: object.hpp
+// File: object3d.hpp
 // Date: 2024-11-23
 
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 
 #include <iostream>
-#include <vector>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -17,9 +17,9 @@
 
 #include <mesh.hpp>
 
-namespace Elenore
+namespace Elenore::Entity
 {
-    class Object
+    class Object3D
     {
     public:
         /**
@@ -28,8 +28,8 @@ namespace Elenore
          * @param object_name The object's name.
          * @param position The object's location.
          */
-        Object(std::shared_ptr<Mesh> mesh, std::string object_name, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f));
-        void draw(const glm::mat4 &view, const glm::mat4 &projection);
+        Object3D(std::shared_ptr<Graphics::Mesh> mesh, std::string name, glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f));
+        void draw();
         /// @brief Sets a new position.
         void setPosition(glm::vec3 position);
         /// @brief Sets a new rotation.
@@ -40,10 +40,11 @@ namespace Elenore
     private:
         // Mesh *_mesh;
         glm::mat4 getModelMatrix();
-        std::shared_ptr<Mesh> _mesh;
+        std::shared_ptr<Graphics::Mesh> _mesh;
         glm::vec3 _position, _scale, _rotation;
         std::string _name;
     };
-} // Elenore
+
+} // Elenore::Entity
 
 #endif // OBJECT_HPP

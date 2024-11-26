@@ -6,7 +6,9 @@
 #include <logger.hpp>
 #include <shader.hpp>
 
-namespace Elenore
+#include <glm/ext.hpp>
+
+namespace Elenore::Graphics
 {
     Shader::Shader(const char *vertex_path, const char *fragment_path)
     {
@@ -82,4 +84,4 @@ namespace Elenore
         Log::info("Deleting shader...");
         glDeleteShader(_shader);
     }
-} // namespace Elenore
+} // Elenore::Graphics

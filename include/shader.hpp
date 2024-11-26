@@ -6,15 +6,11 @@
 #ifndef SHADER_HPP
 #define SHADER_HPP
 
-#include <iostream>
-#include <vector>
-#include <string>
-
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/ext.hpp>
 
-namespace Elenore
+#include <glm/mat4x4.hpp>
+
+namespace Elenore::Graphics
 {
     class Shader
     {
@@ -46,6 +42,6 @@ namespace Elenore
         void compileCheck(GLuint program, GLboolean is_shader);
     };
 
-} // Elenore
+} // Elenore::Graphics
 
 #endif // SHADER_HPP

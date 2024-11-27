@@ -24,14 +24,14 @@ namespace Elenore::Graphics::UI
     {
         if (FT_Init_FreeType(&_ft))
         {
-            Log::error("Font to start FreeType.");
+            Log::warning("Failed to start FreeType.");
             return;
         }
 
         // Setting width 0 will calculate automatically.
         if (FT_New_Face(_ft, "fonts/arial.ttf", 0, &_face))
         {
-            Log::error("Failed to load font.");
+            Log::warning("Failed to load font.");
             return;
         }
         FT_Set_Pixel_Sizes(_face, 0, size);

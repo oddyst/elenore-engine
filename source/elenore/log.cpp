@@ -12,14 +12,14 @@ namespace Elenore::Log
 {
     void info(const std::string &description)
     {
-        std::cout << "INFO: " << description << "\n";
+        std::cout << "[INFO]: " << description << "\n";
     }
     void error(const std::string &description)
     {
-        std::cerr << "ERROR: " << description << "\n";
+        std::cerr << "[ERROR]: " << description << "\n";
     }
     void warning(const std::string &description)
     {
-        std::cout << "WARNING: " << description << "\n";
+        std::cout << "[WARNING]: " << description << "\n";
     }
 } // namespace Elenore::Log

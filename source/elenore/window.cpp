@@ -41,11 +41,11 @@ namespace Elenore::Core
             return;
         }
 
-        Log::info("OpenGL version: " + std::string(reinterpret_cast<const char*>(glGetString(GL_VERSION))));
+        Log::info("OpenGL version: " + std::string(reinterpret_cast<const char *>(glGetString(GL_VERSION))));
 
         glfwSetFramebufferSizeCallback(_data, framebuffer_size_callback);
-        
-        glfwSwapInterval(0);
+
+        glfwSwapInterval(1);
 
         _previous_time = glfwGetTime();
         _delta_time = 0.0;

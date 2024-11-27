@@ -5,6 +5,7 @@
 
 #include <elenore/log.hpp>
 #include <elenore/object3d.hpp>
+#include <elenore/text.hpp>
 #include <elenore/window.hpp>
 
 int main(void)
@@ -14,6 +15,8 @@ int main(void)
     Elenore::Log::warning("This is a pre-alpha version.");
 
     Elenore::Core::Window window(800, 600);
+
+    Elenore::Graphics::UI::Text("Hello, world!", 10);
 
     std::vector<GLfloat> vertices{
 
@@ -31,9 +34,9 @@ int main(void)
         0.5f,
         0.0f,
         // Color
+        0.0f,
         1.0f,
-        1.0f,
-        1.0f,
+        0.0f,
 
         // Position
         -0.5f,
@@ -41,16 +44,16 @@ int main(void)
         0.0f,
         // Color
         0.0f,
-        1.0f,
         0.0f,
+        1.0f,
 
         // Position
         0.5f,
         -0.5f,
         0.0f,
         // Color
-        0.0f,
-        0.0f,
+        1.0f,
+        1.0f,
         1.0f,
     };
 
@@ -94,10 +97,10 @@ int main(void)
 
     while (!window.shouldClose())
     {
-        ++x;
         window.beginDraw();
-        object.draw();
+        x += 100 * window.getDeltaTime();
         object.setRotation(glm::vec3(x, x, 0));
+        object.draw();
         window.endDraw();
     }
 

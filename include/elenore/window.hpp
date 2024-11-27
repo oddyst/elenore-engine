@@ -19,10 +19,13 @@ namespace Elenore::Core
         int shouldClose();
         void beginDraw(const GLclampf RED = 0.1f, const GLclampf GREEN = 0.1f, const GLclampf BLUE = 0.1f, const GLclampf ALPHA = 1.0f);
         void endDraw();
+        double getDeltaTime();
         ~Window();
 
     private:
         GLFWwindow *_data;
+        double _previous_time;
+        double _delta_time;
         static void framebuffer_size_callback(GLFWwindow *window, int width, int height);
     };
 } // namespace Elenore::Core

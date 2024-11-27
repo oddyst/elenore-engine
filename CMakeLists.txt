@@ -16,6 +16,7 @@ add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de
             source/elenore/mesh.cpp
             source/elenore/object3d.cpp
             source/elenore/window.cpp
+            source/elenore/text.cpp
             source/elenore/shader.cpp
             )
 

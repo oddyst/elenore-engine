@@ -41,7 +41,14 @@ namespace Elenore::Core
             return;
         }
 
+        Log::info("OpenGL version: " + std::string(reinterpret_cast<const char*>(glGetString(GL_VERSION))));
+
         glfwSetFramebufferSizeCallback(_data, framebuffer_size_callback);
+        
+        glfwSwapInterval(0);
+
+        _previous_time = glfwGetTime();
+        _delta_time = 0.0;
     }
 
     void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height)
@@ -56,6 +63,14 @@ namespace Elenore::Core
     int Window::shouldClose()
     {
         return glfwWindowShouldClose(_data);
+    }
+
+    double Window::getDeltaTime()
+    {
+        double current_time = glfwGetTime();
+        _delta_time = current_time - _previous_time;
+        _previous_time = current_time;
+        return _delta_time;
     }
 
     void Window::beginDraw(const GLclampf RED, const GLclampf GREEN, const GLclampf BLUE, const GLclampf ALPHA)

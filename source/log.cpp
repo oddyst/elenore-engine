@@ -6,18 +6,19 @@
 #include <elenore/log.hpp>
 
 #include <iostream>
+#include <string>
 
 namespace Elenore::Log
 {
-    void info(const char *description)
+    void info(const std::string &description)
     {
         std::cout << "INFO: " << description << "\n";
     }
-    void error(const char *description)
+    void error(const std::string &description)
     {
-        std::cerr << "INFO: " << description << "\n";
+        std::cerr << "ERROR: " << description << "\n";
     }
-    void warning(const char *description)
+    void warning(const std::string &description)
     {
         std::cout << "WARNING: " << description << "\n";
     }

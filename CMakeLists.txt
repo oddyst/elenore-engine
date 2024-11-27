@@ -7,9 +7,17 @@ find_package(PkgConfig REQUIRED) # Procura o pkg-config no sistema.
 
 pkg_check_modules(FREETYPE REQUIRED freetype2) # Procura no sistema o freetype2.
 
-project(elenore-engine VERSION 0.1.0 LANGUAGES CXX) # Configurações do projeto.
+project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projeto.
 
-add_library(elenore SHARED source/log.cpp) # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
+add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
+            elenore SHARED
+            source/buffer_object.cpp
+            source/log.cpp
+            source/mesh.cpp
+            source/object3d.cpp
+            source/window.cpp
+            source/shader.cpp
+            )
 
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 

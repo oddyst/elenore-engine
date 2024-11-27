@@ -6,11 +6,13 @@
 #ifndef LOG_HPP
 #define LOG_HPP
 
+#include <string>
+
 namespace Elenore::Log
 {
-    void info(const char *description);
-    void error(const char *description);
-    void warning(const char *description);
+    void info(const std::string &description);
+    void error(const std::string &description);
+    void warning(const std::string &description);
 } // namespace Elenore::Log
 
 #endif // LOG_HPP

@@ -11,12 +11,12 @@ project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projet
 
 add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
             elenore SHARED
-            source/buffer_object.cpp
-            source/log.cpp
-            source/mesh.cpp
-            source/object3d.cpp
-            source/window.cpp
-            source/shader.cpp
+            source/elenore/buffer_object.cpp
+            source/elenore/log.cpp
+            source/elenore/mesh.cpp
+            source/elenore/object3d.cpp
+            source/elenore/window.cpp
+            source/elenore/shader.cpp
             )
 
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.

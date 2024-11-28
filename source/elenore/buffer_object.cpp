@@ -3,7 +3,7 @@
 // File: buffer_object.cpp
 // Date: 2024-11-26
 
-#include <elenore/buffer_object.hpp>
+#include "elenore/buffer_object.hpp"
 
 namespace Elenore::Graphics::Object
 {

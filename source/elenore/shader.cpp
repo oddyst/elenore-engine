@@ -3,8 +3,8 @@
 // File: shader.cpp
 // Date: 2024-11-27
 
-#include <elenore/log.hpp>
-#include <elenore/shader.hpp>
+#include "elenore/shader.hpp"
+#include "elenore/log.hpp"
 #include <glm/ext.hpp>
 
 namespace Elenore::Graphics
@@ -82,7 +82,15 @@ namespace Elenore::Graphics
             Log::error(std::string("Failed to get uniform location ") + name);
             return;
         }
+        else
+        {
+            glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(matrix));
+        }
+    }
 
-        glUniformMatrix4fv(_location, 1, GL_FALSE, glm::value_ptr(matrix));
+    Shader::~Shader()
+    {
+        glDeleteProgram(_program);
+        Log::info("Deleted shader.");
     }
 } // namespace Elenore::Graphics

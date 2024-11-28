@@ -17,6 +17,7 @@ namespace Elenore::Graphics
         Shader(const char *vertex_shader_source, const char *fragment_shader_source);
         void setUniform(const char *name, glm::mat4 matrix);
         void use();
+        ~Shader();
 
     private:
         GLuint _program;

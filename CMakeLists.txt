@@ -9,11 +9,16 @@ pkg_check_modules(FREETYPE REQUIRED freetype2) # Procura no sistema o freetype2.
 
 project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projeto.
 
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
+
 add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
             elenore SHARED
             source/elenore/buffer_object.cpp
+            source/elenore/entity3d.cpp
+            source/elenore/camera3d.cpp
             source/elenore/log.cpp
-            source/elenore/mesh.cpp
+            source/elenore/mesh3d.cpp
             source/elenore/object3d.cpp
             source/elenore/window.cpp
             source/elenore/text.cpp
@@ -26,5 +31,3 @@ target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elenore ${FREETYPE_LIB
 
 target_include_directories(elenore PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
 target_include_directories(elenore-engine PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 
-
-

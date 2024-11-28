@@ -6,8 +6,8 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
-#include <elenore/buffer_object.hpp>
-#include <elenore/shader.hpp>
+#include "buffer_object.hpp"
+#include "shader.hpp"
 #include <memory>
 
 namespace Elenore::Graphics
@@ -21,7 +21,7 @@ namespace Elenore::Graphics
         GLuint getVBO() const;
         GLuint getEBO() const;
         GLuint getVAO() const;
-        Shader getShader() const;
+        Shader &getShader();
 
     private:
         Shader _shader;

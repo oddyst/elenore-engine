@@ -5,8 +5,8 @@
 
 #include <GL/glew.h>
 
-#include <elenore/log.hpp>
-#include <elenore/text.hpp>
+#include "elenore/log.hpp"
+#include "elenore/text.hpp"
 #include <glm/vec2.hpp>
 
 namespace Elenore::Graphics::UI
@@ -24,14 +24,14 @@ namespace Elenore::Graphics::UI
     {
         if (FT_Init_FreeType(&_ft))
         {
-            Log::warning("Failed to start FreeType.");
+            Log::error("Failed to start FreeType.");
             return;
         }
 
         // Setting width 0 will calculate automatically.
         if (FT_New_Face(_ft, "fonts/arial.ttf", 0, &_face))
         {
-            Log::warning("Failed to load font.");
+            Log::error("Failed to load font.");
             return;
         }
         FT_Set_Pixel_Sizes(_face, 0, size);
@@ -41,9 +41,9 @@ namespace Elenore::Graphics::UI
 
     Text::~Text()
     {
-        if (_face)
-            FT_Done_Face(_face);
-        if (_ft)
-            FT_Done_FreeType(_ft);
+        // if (_ft != nullptr)
+        //     FT_Done_FreeType(_ft);
+        // if (_face != nullptr)
+        //     FT_Done_Face(_face);
     }
 } // namespace Elenore::Graphics::UI

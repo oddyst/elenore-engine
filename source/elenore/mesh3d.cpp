@@ -3,8 +3,8 @@
 // File: mesh.cpp
 // Date: 2024-11-26
 
-#include <elenore/log.hpp>
-#include <elenore/mesh.hpp>
+#include "elenore/log.hpp"
+#include "elenore/mesh3d.hpp"
 
 namespace Elenore::Graphics
 {
@@ -12,7 +12,7 @@ namespace Elenore::Graphics
         : _vertices(vertices), _indices(indices), _shader(shader)
     {
         Log::info("Creating mesh...");
-
+        
         _vao = std::make_unique<Object::VAO>();
         _vbo = std::make_unique<Object::VBO>(_vertices);
         _ebo = std::make_unique<Object::EBO>(_indices);
@@ -50,7 +50,7 @@ namespace Elenore::Graphics
         return _vao->getID();
     }
 
-    Shader Mesh3D::getShader() const
+    Shader &Mesh3D::getShader()
     {
         return _shader;
     }

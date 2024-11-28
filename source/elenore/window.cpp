@@ -3,12 +3,12 @@
 // File: window.cpp
 // Date: 2024-11-26
 
-#include <elenore/log.hpp>
-#include <elenore/window.hpp>
+#include "elenore/window.hpp"
+#include "elenore/log.hpp"
 
 namespace Elenore::Core
 {
-    Window::Window(const int &WIDTH, const int &HEIGHT, const char *TITLE)
+    Window::Window(const int &width, const int &height, const char *title)
     {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -24,7 +24,8 @@ namespace Elenore::Core
             glfwTerminate();
             return;
         }
-        _data = glfwCreateWindow(WIDTH, HEIGHT, TITLE, nullptr, nullptr);
+
+        _data = glfwCreateWindow(width, height, title, nullptr, nullptr);
 
         if (_data == nullptr)
         {
@@ -49,6 +50,8 @@ namespace Elenore::Core
 
         _previous_time = glfwGetTime();
         _delta_time = 0.0;
+
+        glEnable(GL_DEPTH_TEST);
     }
 
     void Window::framebuffer_size_callback(GLFWwindow *window, int width, int height)

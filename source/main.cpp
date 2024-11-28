@@ -3,10 +3,14 @@
 // File: main.cpp
 // Date: 2024-11-26
 
+#include <elenore/camera3d.hpp>
 #include <elenore/log.hpp>
 #include <elenore/object3d.hpp>
 #include <elenore/text.hpp>
 #include <elenore/window.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp>
 
 int main(void)
 {
@@ -15,8 +19,6 @@ int main(void)
     Elenore::Log::warning("This is a pre-alpha version.");
 
     Elenore::Core::Window window(800, 600);
-
-    Elenore::Graphics::UI::Text("Hello, world!", 10);
 
     std::vector<GLfloat> vertices{
 
@@ -68,7 +70,7 @@ int main(void)
     out vec3 vertex_color;
 
     uniform mat4 model;
-
+    
     void main()
     {
         gl_Position = model * vec4(position, 1.0);
@@ -88,7 +90,6 @@ int main(void)
     )";
 
     Elenore::Graphics::Shader shader(vertex_shader, fragment_shader);
-
     auto mesh = std::make_shared<Elenore::Graphics::Mesh3D>(vertices, indices, shader);
 
     Elenore::Entity::Object3D object(mesh, "Square");
@@ -98,9 +99,10 @@ int main(void)
     while (!window.shouldClose())
     {
         window.beginDraw();
-        x += 100 * window.getDeltaTime();
-        object.setRotation(glm::vec3(x, x, 0));
+        
+        // object.setRotation(glm::vec3(x, x, 0));
         object.draw();
+
         window.endDraw();
     }
 

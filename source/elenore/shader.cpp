@@ -9,8 +9,8 @@
 
 namespace Elenore::Graphics
 {
-    void Shader::use() { glUseProgram(_program); }
-    GLuint Shader::getProgram() { return _program; }
+    void Shader::use() const { glUseProgram(_program); }
+    GLuint Shader::getProgram() const { return _program; }
 
     Shader::Shader(const char *vertex_shader_source, const char *fragment_shader_source)
     {
@@ -61,7 +61,7 @@ namespace Elenore::Graphics
         }
     }
 
-    void Shader::setUniform(const char *name, const glm::mat4 &matrix)
+    void Shader::setUniform(const char *name, const glm::mat4 &matrix) const
     {
         GLuint _location = glGetUniformLocation(_program, name);
 

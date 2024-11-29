@@ -12,7 +12,7 @@ namespace Elenore::Entity
     void Entity3D::setRotation(glm::vec3 rotation) { _rotation = rotation; }
     void Entity3D::setScale(glm::vec3 scale) { _scale = scale; }
 
-    glm::mat4 Entity3D::getModel()
+    glm::mat4 Entity3D::getModel() const
     {
         glm::mat4 model = glm::mat4(1.0f);
 

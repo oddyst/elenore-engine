@@ -17,7 +17,7 @@ namespace Elenore::Entity
         void setPosition(glm::vec3 position);
         void setRotation(glm::vec3 rotation);
         void setScale(glm::vec3 scale);
-        glm::mat4 getModel();
+        glm::mat4 getModel() const;
     protected:
         glm::mat4 _model;
         glm::vec3 _position;

@@ -9,6 +9,12 @@
 namespace Elenore::Core
 {
     Window::Window(const int &width, const int &height, const char *title)
+        : _width(width), _height(height), _title(title)
+    {
+        init();
+    }
+
+    int Window::init()
     {
         glfwWindowHint(GLFW_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_VERSION_MINOR, 3);
@@ -20,14 +26,14 @@ namespace Elenore::Core
             glfwGetError(&error);
             Log::error(error);
             glfwTerminate();
-            return;
+            return 1;
         }
 
-        _window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+        _window = glfwCreateWindow(_width, _height, _title, nullptr, nullptr);
         if (_window == nullptr)
         {
             Log::error("Failed to create window");
-            return;
+            return 1;
         }
 
         glfwMakeContextCurrent(_window);
@@ -35,7 +41,7 @@ namespace Elenore::Core
         if (glewInit() != GLEW_OK)
         {
             Log::error("Failed to initialize glew");
-            return;
+            return 1;
         }
 
         glfwSetFramebufferSizeCallback(_window, framebufferSizeCallback);
@@ -43,6 +49,8 @@ namespace Elenore::Core
         glfwSwapInterval(1);
 
         Log::info("Created window");
+        
+        return 0;
     }
 
     void Window::framebufferSizeCallback(GLFWwindow *window, int w, int h)

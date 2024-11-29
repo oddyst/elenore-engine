@@ -23,6 +23,9 @@ namespace Elenore::Core
         static void framebufferSizeCallback(GLFWwindow *window, int w, int h);
 
     private:
+        int init();
+        int _width, _height;
+        const char *_title;
         GLFWwindow *_window;
     };
 } // namespace Elenore::Core

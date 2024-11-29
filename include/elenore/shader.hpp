@@ -24,9 +24,9 @@ namespace Elenore::Graphics
          */
         GLuint compileShader(const char *source, GLenum type, GLboolean is_shader);
         void compileCheck(GLuint shader, GLboolean is_shader);
-        void use();
-        GLuint getProgram();
-        void setUniform(const char *name, const glm::mat4 &matrix);
+        void use() const;
+        GLuint getProgram() const;
+        void setUniform(const char *name, const glm::mat4 &matrix) const;
         ~Shader();
 
     private:

@@ -7,15 +7,27 @@ find_package(PkgConfig REQUIRED) # Procura o pkg-config no sistema.
 
 pkg_check_modules(FREETYPE REQUIRED freetype2) # Procura no sistema o freetype2.
 
-project(elenore-engine VERSION 0.1.0 LANGUAGES CXX) # Configurações do projeto.
+project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projeto.
 
-add_library(elenore SHARED source/buffer_object.cpp source/window.cpp source/mesh.cpp source/object2d.cpp source/object3d.cpp source/shader.cpp source/text.cpp source/logger.cpp source/camera.cpp) # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
 
+add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
+            elib SHARED
+            source/elenore/buffer_object.cpp
+            source/elenore/entity.cpp
+            source/elenore/object3d.cpp
+            source/elenore/window.cpp
+            source/elenore/mesh3d.cpp
+            source/elenore/shader.cpp
+            )
+
+add_library(elog SHARED source/elenore/log.cpp)
+            
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 
-target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elenore ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
+target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elib elog ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
 
-target_include_directories(elenore PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
+target_include_directories(elib PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
 target_include_directories(elenore-engine PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 
-
-
+target_include_directories(elog PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 

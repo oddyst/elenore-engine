@@ -13,21 +13,21 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
 
 add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
-            elenore SHARED
+            elib SHARED
             source/elenore/buffer_object.cpp
-            source/elenore/entity3d.cpp
-            source/elenore/camera3d.cpp
-            source/elenore/log.cpp
-            source/elenore/mesh3d.cpp
+            source/elenore/entity.cpp
             source/elenore/object3d.cpp
             source/elenore/window.cpp
-            source/elenore/text.cpp
+            source/elenore/mesh3d.cpp
             source/elenore/shader.cpp
             )
 
+add_library(elog SHARED source/elenore/log.cpp)
+            
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 
-target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elenore ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
+target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elib elog ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
 
-target_include_directories(elenore PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
+target_include_directories(elib PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
 target_include_directories(elenore-engine PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 
+target_include_directories(elog PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 

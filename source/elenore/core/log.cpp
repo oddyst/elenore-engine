@@ -3,7 +3,7 @@
 // File: log.cpp
 // Date: 2024-11-28
 
-#include "elenore/log.hpp"
+#include "elenore/core/log.hpp"
 #include <iostream>
 
 #define RED_COLOR "\033[31m"

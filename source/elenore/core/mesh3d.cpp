@@ -3,8 +3,8 @@
 // File: mesh3d.cpp
 // Date: 2024-11-28
 
-#include "elenore/mesh3d.hpp"
-#include "elenore/log.hpp"
+#include "elenore/core/mesh3d.hpp"
+#include "elenore/core/log.hpp"
 
 namespace Elenore::Graphics
 {

@@ -3,8 +3,8 @@
 // File: shader.cpp
 // Date: 2024-11-28
 
-#include "elenore/shader.hpp"
-#include "elenore/log.hpp"
+#include "elenore/core/shader.hpp"
+#include "elenore/core/log.hpp"
 #include <glm/ext.hpp>
 
 namespace Elenore::Graphics

@@ -3,8 +3,8 @@
 // File: object3d.cpp
 // Date: 2024-11-28
 
-#include "elenore/object3d.hpp"
-#include "elenore/log.hpp"
+#include "elenore/core/object3d.hpp"
+#include "elenore/core/log.hpp"
 
 namespace Elenore::Entity
 {
@@ -25,5 +25,10 @@ namespace Elenore::Entity
         glBindVertexArray(_mesh->getVAO());
         glDrawElements(GL_TRIANGLES, _mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
+    }
+
+    Object3D::~Object3D()
+    {
+        Log::info("Destroyed object");
     }
 } // namespace Elenore::Entity

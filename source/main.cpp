@@ -3,14 +3,14 @@
 // File: main.cpp
 // Date: 2024-11-26
 
-#include "elenore/log.hpp"
-#include "elenore/mesh3d.hpp"
-#include "elenore/object3d.hpp"
-#include "elenore/window.hpp"
+#include "elenore/core/log.hpp"
+#include "elenore/core/mesh3d.hpp"
+#include "elenore/core/object3d.hpp"
+#include "elenore/core/window.hpp"
 
 int main(void)
 {
-    Elenore::Log::info("Hello, world");
+    Elenore::Log::info("Hello, world!");
 
     Elenore::Core::Window window;
 
@@ -92,7 +92,7 @@ int main(void)
         window.beginDraw();
         x += 1.0f;
 
-        object.setRotation(glm::vec3(0.0f, 0.0f, x));
+        object.setRotation(glm::vec3(x, x, x));
 
         object.draw();
         window.endDraw();

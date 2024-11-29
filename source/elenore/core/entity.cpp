@@ -3,7 +3,7 @@
 // File: entity.cpp
 // Date: 2024-11-28
 
-#include "elenore/entity.hpp"
+#include "elenore/core/entity.hpp"
 #include <glm/ext.hpp>
 
 namespace Elenore::Entity

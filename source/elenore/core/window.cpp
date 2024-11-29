@@ -3,8 +3,8 @@
 // File: window.cpp
 // Date: 2024-11-28
 
-#include "elenore/window.hpp"
-#include "elenore/log.hpp"
+#include "elenore/core/window.hpp"
+#include "elenore/core/log.hpp"
 
 namespace Elenore::Core
 {

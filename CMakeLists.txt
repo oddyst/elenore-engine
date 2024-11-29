@@ -14,15 +14,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
 
 add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
             elib SHARED
-            source/elenore/buffer_object.cpp
-            source/elenore/entity.cpp
-            source/elenore/object3d.cpp
-            source/elenore/window.cpp
-            source/elenore/mesh3d.cpp
-            source/elenore/shader.cpp
+            source/elenore/core/buffer_object.cpp
+            source/elenore/core/entity.cpp
+            source/elenore/core/object3d.cpp
+            source/elenore/core/window.cpp
+            source/elenore/core/mesh3d.cpp
+            source/elenore/core/shader.cpp
             )
 
-add_library(elog SHARED source/elenore/log.cpp)
+add_library(elog SHARED source/elenore/core/log.cpp)
             
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 

@@ -3,8 +3,8 @@
 // File: buffer_object.cpp
 // Date: 2024-11-28
 
-#include "elenore/buffer_object.hpp"
-#include "elenore/log.hpp"
+#include "elenore/core/buffer_object.hpp"
+#include "elenore/core/log.hpp"
 
 namespace Elenore::Graphics
 {

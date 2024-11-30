@@ -12,6 +12,9 @@ project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projet
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
 
+enable_testing()
+add_subdirectory(tests)
+
 add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de "libelenore.so".
             elib SHARED
             source/elenore/core/buffer_object.cpp

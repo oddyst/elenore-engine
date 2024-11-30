@@ -1,7 +1,7 @@
 // Author: oknauta
 // License:
-// File: main.cpp
-// Date: 2024-11-26
+// File: test_file.cpp
+// Date: 2024-11-29
 
 #include "elenore/core/log.hpp"
 #include "elenore/core/mesh3d.hpp"
@@ -16,35 +16,50 @@ int main(void)
 
     std::vector<GLfloat> vertices =
         {
+            1.0f,
+            1.0f,
+            0.0f,
+            // color
+            1.0f,
+            0.0f,
+            0.0f,
+
+            -1.0f,
+            1.0f,
+            0.0f,
+            // color
             0.0f,
             1.0f,
             0.0f,
-            // Colour
-            1.0f,
-            0.0f,
-            0.0,
 
             -1.0f,
             -1.0f,
             0.0f,
-            // Colour
+            // color
+            0.0f,
             0.0f,
             1.0f,
-            0.0f,
 
             1.0f,
             -1.0f,
             0.0f,
-            // Colour
-            0.0f,
-            0.0f,
-            1.0f
+            // color
+            1.0f,
+            1.0f,
+            1.0f,
 
         };
 
     std::vector<GLuint> indices =
         {
-            0, 1, 2};
+            0,
+            1,
+            2,
+
+            0,
+            2,
+            3,
+        };
 
     const char *vertex_shader, *fragment_shader;
 
@@ -79,7 +94,7 @@ int main(void)
 
     auto mesh = std::make_shared<Elenore::Graphics::Mesh3D>(vertices, indices, shader);
 
-    Elenore::Entity::Object3D object("Star", mesh);
+    Elenore::Entity::Object3D object("Triangle", mesh);
 
     object.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -90,11 +105,11 @@ int main(void)
     while (!window.shouldClose())
     {
         window.beginDraw();
-        // x += 1.0f;
+        x += 1.0f;
 
-        // object.setRotation(glm::vec3(x, x, x));
+        object.setRotation(glm::vec3(x, x, x));
 
-        // object.draw();
+        object.draw();
         window.endDraw();
     }
 

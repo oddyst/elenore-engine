@@ -18,10 +18,6 @@ namespace Elenore::Entity
     {
         _mesh->getShader().use();
 
-        _model = getModel();
-
-        _mesh->getShader().setUniform("model", _model);
-
         glBindVertexArray(_mesh->getVAO());
         glDrawElements(GL_TRIANGLES, _mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
@@ -31,4 +27,6 @@ namespace Elenore::Entity
     {
         Log::info("Destroyed object");
     }
+    
+    Graphics::Shader &Object3D::getShader() { return _mesh->getShader(); }
 } // namespace Elenore::Entity

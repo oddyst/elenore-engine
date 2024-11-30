@@ -76,6 +76,7 @@ namespace Elenore::Graphics
 
     Shader::~Shader()
     {
-        glDeleteShader(_program);
+        Log::info("Destroyed program");
+        glDeleteProgram(_program);
     }
 } // namespace Elenore::Graphics

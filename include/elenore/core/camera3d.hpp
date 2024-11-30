@@ -13,7 +13,11 @@ namespace Elenore::Entity
     class Camera3D : Entity3D
     {
     public:
-        Camera3D();
+        Camera3D(glm::vec3 target);
+        glm::mat4 lookAt();
+    private:
+        glm::vec3 _up, _right, _forward;
+        glm::vec3 _target;
     };
     
     

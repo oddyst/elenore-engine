@@ -7,7 +7,7 @@ find_package(PkgConfig REQUIRED) # Procura o pkg-config no sistema.
 
 pkg_check_modules(FREETYPE REQUIRED freetype2) # Procura no sistema o freetype2.
 
-project(elenore-engine VERSION 0.1.01 LANGUAGES CXX) # Configurações do projeto.
+project(elenore-engine VERSION 0.1.1 LANGUAGES CXX) # Configurações do projeto.
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
@@ -24,6 +24,7 @@ add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de
             source/elenore/core/mesh3d.cpp
             source/elenore/core/shader.cpp
             source/elenore/core/tools.cpp
+            source/elenore/core/camera3d.cpp
             )
 
 add_library(elog SHARED source/elenore/core/log.cpp)

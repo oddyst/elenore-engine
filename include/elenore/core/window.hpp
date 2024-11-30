@@ -17,7 +17,7 @@ namespace Elenore::Core
         Window(const int &width = 800, const int &height = 600, const char *title = "GL generic window");
         GLFWwindow *get();
         int shouldClose();
-        void beginDraw(const GLclampf &RED = 0.0f, const GLclampf &GREEN = 0.0f, const GLclampf &BLUE = 0.05f);
+        void beginDraw(const GLclampf &RED = 0.0f, const GLclampf &GREEN = 0.0f, const GLclampf &BLUE = 0.1f);
         void endDraw();
         ~Window();
         static void framebufferSizeCallback(GLFWwindow *window, int w, int h);

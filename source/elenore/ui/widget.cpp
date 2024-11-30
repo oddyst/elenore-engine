@@ -7,5 +7,5 @@
 
 namespace Elenore::Graphics::UI
 {
-
+    /// @todo Widgets
 } // Elenore::UI

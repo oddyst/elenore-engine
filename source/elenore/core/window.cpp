@@ -49,7 +49,9 @@ namespace Elenore::Core
         glfwSwapInterval(1);
 
         Log::info("Created window");
-        
+
+        glEnable(GL_DEPTH_TEST);
+
         return 0;
     }
 
@@ -61,7 +63,7 @@ namespace Elenore::Core
     void Window::beginDraw(const GLclampf &RED, const GLclampf &GREEN, const GLclampf &BLUE)
     {
         glClearColor(RED, GREEN, BLUE, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void Window::endDraw()

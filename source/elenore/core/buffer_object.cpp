@@ -21,7 +21,11 @@ namespace Elenore::Graphics
     }
     void VAO::bind() const { glBindVertexArray(_data); }
     void VAO::unbind() const { glBindVertexArray(0); }
-    VAO::~VAO() { glDeleteVertexArrays(1, &_data); }
+    VAO::~VAO()
+    {
+        Log::info("Destroyed VAO");
+        glDeleteVertexArrays(1, &_data);
+    }
 
     // VBO
 
@@ -39,7 +43,11 @@ namespace Elenore::Graphics
     {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
-    VBO::~VBO() { glDeleteBuffers(1, &_data); }
+    VBO::~VBO()
+    {
+        Log::info("Destroyed VBO");
+        glDeleteBuffers(1, &_data);
+    }
 
     // EBO
 
@@ -59,6 +67,7 @@ namespace Elenore::Graphics
     }
     EBO::~EBO()
     {
+        Log::info("Destroyed EBO");
         glDeleteBuffers(1, &_data);
     }
 

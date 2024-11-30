@@ -19,6 +19,7 @@ namespace Elenore::Entity
         Object3D(const char *name, std::shared_ptr<Graphics::Mesh3D> mesh);
         void draw();
         ~Object3D();
+        Graphics::Shader &getShader();
         
     private:
         std::shared_ptr<Graphics::Mesh3D> _mesh;

@@ -7,6 +7,7 @@
 #include "elenore/core/mesh3d.hpp"
 #include "elenore/core/object3d.hpp"
 #include "elenore/core/window.hpp"
+#include "elenore/core/tools.hpp"
 
 int main(void)
 {
@@ -46,40 +47,15 @@ int main(void)
         {
             0, 1, 2};
 
-    const char *vertex_shader, *fragment_shader;
-
-    vertex_shader = R"(
-    #version 330 core
-    layout(location = 0) in vec3 position;
-    layout(location = 1) in vec3 color;
-    out vec3 vertex_color;
-
-    uniform mat4 model;
-
-    void main()
-    {
-        gl_Position = model * vec4(position, 1.0);
-        vertex_color = color;
-    }
-
-)";
-
-    fragment_shader = R"(
-    #version 330 core
-    in vec3 vertex_color;
-    out vec4 frag_color;
-
-    void main()
-    {
-        frag_color = vec4(vertex_color, 1.0f);
-    }
-    )";
+    const char *vertex_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/vertex.glsl");
+    const char *fragment_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/fragment.glsl");
+    
 
     Elenore::Graphics::Shader shader(vertex_shader, fragment_shader);
 
     auto mesh = std::make_shared<Elenore::Graphics::Mesh3D>(vertices, indices, shader);
 
-    Elenore::Entity::Object3D object("Star", mesh);
+    Elenore::Entity::Object3D object("Triangle", mesh);
 
     object.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -90,11 +66,11 @@ int main(void)
     while (!window.shouldClose())
     {
         window.beginDraw();
-        // x += 1.0f;
+        x += 1.0f;
 
-        // object.setRotation(glm::vec3(x, x, x));
+        object.setRotation(glm::vec3(x, x, x));
 
-        // object.draw();
+        object.draw();
         window.endDraw();
     }
 

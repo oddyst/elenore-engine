@@ -23,14 +23,21 @@ add_library( # Adiciona arquivos necessários à biblioteca dinâmica chamada de
             source/elenore/core/window.cpp
             source/elenore/core/mesh3d.cpp
             source/elenore/core/shader.cpp
+            source/elenore/core/tools.cpp
             )
 
 add_library(elog SHARED source/elenore/core/log.cpp)
             
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 
+target_link_libraries(elib PRIVATE miniz)
+
 target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elib elog ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
 
 target_include_directories(elib PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto à biblioteca dinâmica. 
 target_include_directories(elenore-engine PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 
 target_include_directories(elog PRIVATE ${PROJECT_SOURCE_DIR}/include ${FREETYPE_INCLUDE_DIRS}) # Linka os cabeçalhos do projeto ao executável. 
+
+add_custom_target(pack_assets ALL COMMAND "7z" "a" "-tzip" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets.pkg" "${PROJECT_SOURCE_DIR}/assets/*")
+
+add_dependencies(elenore-engine pack_assets)

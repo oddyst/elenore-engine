@@ -31,7 +31,7 @@ add_library(elog SHARED source/elenore/core/log.cpp)
             
 add_executable(elenore-engine ${PROJECT_SOURCE_DIR}/source/main.cpp) # Linka os arquivos e faz o executável.
 
-target_link_libraries(elib PRIVATE miniz)
+target_link_libraries(elib PRIVATE zip)
 
 target_link_libraries(elenore-engine PRIVATE glfw GLEW GL elib elog ${FREETYPE_LIBRARIES}) # Linka as bibliotecas do compilador ao executável.
 

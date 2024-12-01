@@ -5,54 +5,38 @@
 
 #include "elenore/core/tools.hpp"
 #include "elenore/core/log.hpp"
-#include <miniz.h>
+#include <zip.h>
 
 namespace Elenore::Tools
 {
-    const char *readTextFile(const char *path_zip, const char *path_file)
+    const char *readTextFile(const char *zip_path, const char *file_path)
     {
-        mz_zip_archive _zip;
-        memset(&_zip, 0, sizeof(_zip));
-
-        if (!mz_zip_reader_init_file(&_zip, path_zip, 0))
+        int _error = 0;
+        zip_t *_zip = zip_open(zip_path, 0, &_error);
+        if (_zip == nullptr)
         {
             Log::error("Failed to open packed file.");
             return nullptr;
         }
 
-        mz_uint _index = mz_zip_reader_locate_file(&_zip, path_file, nullptr, MZ_ZIP_FLAG_CASE_SENSITIVE);
-
-        if (_index < 0)
+        zip_file_t *_file = zip_fopen(_zip, file_path, 0);
+        if (_file == nullptr)
         {
-            Log::error("Failed to locate file.");
-            mz_zip_reader_end(&_zip);
+            Log::error("Failed to open file inside packed file.");
             return nullptr;
         }
 
-        mz_zip_archive_file_stat _stat;
-        if (!mz_zip_reader_file_stat(&_zip, _index, &_stat))
-        {
-            Log::error("Failed to load file.");
-            mz_zip_reader_end(&_zip);
-            return nullptr;
-        }
+        zip_stat_t _stat;
+        zip_stat(_zip, file_path, 0, &_stat);
 
-        size_t _buffer_size = (size_t)_stat.m_uncomp_size;
-        char *_buffer = new char[_buffer_size + 1];
+        char *buffer = new char[_stat.size];
 
-        if (!mz_zip_reader_extract_to_mem(&_zip, _index, _buffer, _buffer_size, 0))
-        {
-            delete[] _buffer;
-            Log::error("Failed to extract to memory.");
-            mz_zip_reader_end(&_zip);
-            return nullptr;
-        }
+        zip_fread(_file, buffer, _stat.size);
 
-        _buffer[_buffer_size] = '\0';
+        zip_fclose(_file);
+        zip_close(_zip);
 
-        mz_zip_reader_end(&_zip);
-
-        return _buffer;
+        return buffer;
     }
 
 } // namespace Elenore::Tools

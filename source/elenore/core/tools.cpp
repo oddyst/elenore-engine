@@ -35,7 +35,9 @@ namespace Elenore::Tools
 
         zip_fclose(_file);
         zip_close(_zip);
-
+        
+        buffer[_stat.size] = '\0';
+        
         return buffer;
     }
 

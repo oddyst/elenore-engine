@@ -53,7 +53,25 @@ target_link_libraries(elenore-engine PRIVATE
     ${FREETYPE_LIBRARIES}
 )
 
-endif(WIN32)
+elseif(LINUX)
+
+find_package(GLEW REQUIRED)
+find_package(glfw3 REQUIRED)
+
+# Link libraries to the project.
+target_link_libraries(elib PRIVATE zip glfw GLEW GL elog)
+
+# Link dependencies to the executable.
+target_link_libraries(elenore-engine PRIVATE
+    glfw
+    GLEW
+    GL
+    elog
+    elib
+    ${FREETYPE_LIBRARIES}
+)
+
+endif()
 
 # Include directories.
 target_include_directories(elib PUBLIC

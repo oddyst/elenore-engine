@@ -22,6 +22,8 @@ namespace Elenore::Graphics
         glAttachShader(_program, _fragment_shader);
         glLinkProgram(_program);
         compileCheck(_program, GL_FALSE);
+        glDeleteShader(_vertex_shader);
+        glDeleteShader(_fragment_shader);
     }
 
     GLuint Shader::compileShader(const char *source, GLenum type, GLboolean is_shader)

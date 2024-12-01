@@ -29,15 +29,15 @@ namespace Elenore::Tools
         zip_stat_t _stat;
         zip_stat(_zip, file_path, 0, &_stat);
 
-        char *buffer = new char[_stat.size];
+        char *buffer = new char[_stat.size + 1];
 
         zip_fread(_file, buffer, _stat.size);
 
         zip_fclose(_file);
         zip_close(_zip);
-        
-        buffer[_stat.size] = '\0';
-        
+
+        buffer[_stat.size + 1] = '\0';
+
         return buffer;
     }
 

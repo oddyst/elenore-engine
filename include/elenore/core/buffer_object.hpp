@@ -3,8 +3,8 @@
 // File: buffer_object.hpp
 // Date: 2024-11-28
 
-#ifndef ELN_BUFFER_OBJECT_CPP
-#define ELN_BUFFER_OBJECT_CPP
+#ifndef ELN_BUFFER_OBJECT_HPP
+#define ELN_BUFFER_OBJECT_HPP
 
 #include <GL/glew.h>
 
@@ -15,11 +15,10 @@ namespace Elenore::Graphics
     class BufferObject
     {
     public:
-        BufferObject();
         virtual void bind() const;
         virtual void unbind() const;
         GLuint getData() const;
-        ~BufferObject();
+        virtual ~BufferObject() = 0;
 
     protected:
         GLuint _data;
@@ -31,7 +30,7 @@ namespace Elenore::Graphics
         VAO();
         void bind() const override;
         void unbind() const override;
-        ~VAO();
+        ~VAO() override;
     };
 
     class VBO : public BufferObject
@@ -40,7 +39,7 @@ namespace Elenore::Graphics
         VBO(std::vector<GLfloat> vertices);
         void bind() const override;
         void unbind() const override;
-        ~VBO();
+        ~VBO() override;
 
     private:
         std::vector<GLfloat> _vertices;
@@ -52,11 +51,11 @@ namespace Elenore::Graphics
         EBO(std::vector<GLuint> indices);
         void bind() const override;
         void unbind() const override;
-        ~EBO();
+        ~EBO() override;
 
     private:
         std::vector<GLuint> _indices;
     };
 } // namespace Elenore::Graphics
 
-#endif // ELN_BUFFER_OBJECT_CPP
+#endif // ELN_BUFFER_OBJECT_HPP

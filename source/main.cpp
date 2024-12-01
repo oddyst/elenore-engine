@@ -6,8 +6,8 @@
 #include "elenore/core/log.hpp"
 #include "elenore/core/mesh3d.hpp"
 #include "elenore/core/object3d.hpp"
-#include "elenore/core/window.hpp"
 #include "elenore/core/tools.hpp"
+#include "elenore/core/window.hpp"
 #include <glm/ext.hpp>
 
 int main(void)
@@ -48,7 +48,7 @@ int main(void)
         {
             0, 1, 2};
 
-     const char *vertex_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/vertex.glsl");
+    const char *vertex_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/vertex.glsl");
     const char *fragment_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/fragment.glsl");
 
     Elenore::Graphics::Shader shader(vertex_shader, fragment_shader);
@@ -90,19 +90,19 @@ int main(void)
         // glm::mat4 view = glm::lookAt(camera_position, camera_target, camera_up);
 
         glm::mat4 model = glm::mat4(1.0f);
-        
+
         ++x;
-        
+
         object.getShader().setUniform("projection", projection);
         object.getShader().setUniform("view", view);
         object.getShader().setUniform("model", object.getModel());
-        
+
         // object.setPosition(glm::vec3(0.0f, 0.0f, -20.0f));
-        
+
         object.setPosition(glm::vec3(0.0f, 0.0f, -2.0f));
-        
+
         object.setRotation(glm::vec3(x, x, x));
-        
+
         object.draw();
 
         window.endDraw();

@@ -71,6 +71,6 @@ namespace Elenore::Graphics
         glDeleteBuffers(1, &_data);
     }
 
-    BufferObject::BufferObject() {}
+    // BufferObject::BufferObject() {}
     BufferObject::~BufferObject() {}
 } // namespace Elenore::Graphics

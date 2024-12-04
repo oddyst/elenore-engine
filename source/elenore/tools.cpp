@@ -1,16 +1,18 @@
 // Author: oknauta
 // License:
 // File: tools.cpp
-// Date: 2024-11-30
+// Date: 2024-12-02
 
-#include "elenore/core/tools.hpp"
-#include "elenore/core/log.hpp"
+#include "elenore/tools.hpp"
+#include "elenore/logger.hpp"
+
 #include <zip.h>
 
 namespace Elenore::Tools
 {
-    const char *readTextFile(const char *zip_path, const char *file_path)
+    const char *readTextFromZip(const char *zip_path, const char *file_path)
     {
+
         int _error = 0;
         zip_t *_zip = zip_open(zip_path, 0, &_error);
         if (_zip == nullptr)
@@ -40,5 +42,4 @@ namespace Elenore::Tools
 
         return buffer;
     }
-
 } // namespace Elenore::Tools

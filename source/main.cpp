@@ -3,109 +3,79 @@
 // File: main.cpp
 // Date: 2024-11-26
 
-#include "elenore/core/log.hpp"
-#include "elenore/core/mesh3d.hpp"
-#include "elenore/core/object3d.hpp"
-#include "elenore/core/tools.hpp"
-#include "elenore/core/window.hpp"
-#include <glm/ext.hpp>
+#include <elenore/elenore.hpp>
+
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/ext/matrix_transform.hpp>
 
 int main(void)
 {
-    Elenore::Log::info("Hello, world!");
+    Elenore::Log::info("Hello, world");
 
     Elenore::Core::Window window;
 
-    std::vector<GLfloat> vertices =
-        {
-            0.0f,
-            1.0f,
-            0.0f,
-            // Colour
-            1.0f,
-            0.0f,
-            0.0,
+    std::vector<GLfloat> vertices{
+        0.0f,
+        1.0f,
+        0.0f,
+        1.0f,
+        0.0f,
+        0.0f,
 
-            -1.0f,
-            -1.0f,
-            0.0f,
-            // Colour
-            0.0f,
-            1.0f,
-            0.0f,
+        -1.0f,
+        -1.0f,
+        0.0f,
+        0.0f,
+        1.0f,
+        0.0f,
 
-            1.0f,
-            -1.0f,
-            0.0f,
-            // Colour
-            0.0f,
-            0.0f,
-            1.0f
+        1.0f,
+        -1.0f,
+        0.0f,
+        0.0f,
+        0.0f,
+        1.0f,
+    };
 
-        };
+    std::vector<GLuint> indices{
+        0, 1, 2};
 
-    std::vector<GLuint> indices =
-        {
-            0, 1, 2};
+    const char *vertex_shader_path = Elenore::Tools::readTextFromZip("assets.pkg", "shaders/vertex.glsl");
+    const char *fragment_shader_path = Elenore::Tools::readTextFromZip("assets.pkg", "shaders/fragment.glsl");
 
-    const char *vertex_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/vertex.glsl");
-    const char *fragment_shader = Elenore::Tools::readTextFile("assets.pkg", "shaders/fragment.glsl");
+    Elenore::Graphics::Shader shader(vertex_shader_path, fragment_shader_path);
 
-    Elenore::Graphics::Shader shader(vertex_shader, fragment_shader);
+    Elenore::Graphics::Mesh3D mesh(vertices, indices);
 
-    auto mesh = std::make_shared<Elenore::Graphics::Mesh3D>(vertices, indices, shader);
-    Elenore::Entity::Object3D object("Triangle", mesh);
-
-    auto camera_position = glm::vec3(0.0f, 0.0f, 3.0f);
-    auto camera_target = glm::vec3(0.0f, 0.0f, 0.0f);
-    auto camera_up = glm::vec3(0.0f, 1.0f, 0.0f);
-    auto camera_forward = glm::normalize(camera_position - camera_target);
-    auto camera_right = glm::normalize(glm::cross(camera_up, camera_forward));
-    camera_up = glm::normalize(glm::cross(camera_forward, camera_right));
-
-    object.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-    object.setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-    int width, height;
-
-    glm::mat4 projection;
-    glm::mat4 view;
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 projection = glm::mat4(1.0f);
 
     float x = 0.0f;
 
+    int window_width, window_height;
+
     while (!window.shouldClose())
     {
-        glfwGetWindowSize(window.get(), &width, &height);
-        window.beginDraw();
+        glfwGetWindowSize(window.get(), &window_width, &window_height);
 
-        // glm::mat4 projection = glm::mat4(1.0f);
-        // glm::mat4 view = glm::mat4(1.0f);
+        x -= 0.01f;
 
-        if (projection[0][0] != (float)width / (float)height)
-        {
-            projection = glm::perspective(glm::radians(45.0f), (float)width / (float)height, 0.1f, 100.0f);
-        }
+        projection = glm::perspective(glm::radians(45.0f), (GLfloat)window_width / (GLfloat)window_height, 0.1f, 300.0f);
+        view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        // model = glm::rotate(model, glm::radians(++x), glm::vec3(0.0f, 1.0f, 0.0f));
 
-        view = glm::lookAt(camera_position, camera_target, camera_up);
-        // glm::mat4 projection = glm::ortho(0.f, 400.f, 0.f, 400.f, -1.f, 1.f);
-        // glm::mat4 view = glm::lookAt(camera_position, camera_target, camera_up);
+        window.draw();
 
-        glm::mat4 model = glm::mat4(1.0f);
+        shader.use();
 
-        ++x;
+        shader.setUniform("model", model);
+        shader.setUniform("view", view);
+        shader.setUniform("projection", projection);
 
-        object.getShader().setUniform("projection", projection);
-        object.getShader().setUniform("view", view);
-        object.getShader().setUniform("model", object.getModel());
+        mesh.draw();
 
-        // object.setPosition(glm::vec3(0.0f, 0.0f, -20.0f));
-
-        object.setPosition(glm::vec3(0.0f, 0.0f, -2.0f));
-
-        object.setRotation(glm::vec3(x, x, x));
-
-        object.draw();
-
-        window.endDraw();
+        window.pollEvents();
     }
 
     return 0;

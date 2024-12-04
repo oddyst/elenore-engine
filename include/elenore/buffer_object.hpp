@@ -1,13 +1,12 @@
 // Author: oknauta
 // License:
 // File: buffer_object.hpp
-// Date: 2024-11-28
+// Date: 2024-12-02
 
 #ifndef ELN_BUFFER_OBJECT_HPP
 #define ELN_BUFFER_OBJECT_HPP
 
-#include <GL/glew.h>
-
+#include <GL/gl.h>
 #include <vector>
 
 namespace Elenore::Graphics
@@ -15,8 +14,8 @@ namespace Elenore::Graphics
     class BufferObject
     {
     public:
-        virtual void bind() const;
-        virtual void unbind() const;
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
         GLuint getData() const;
         virtual ~BufferObject() = 0;
 

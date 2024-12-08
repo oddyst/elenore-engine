@@ -18,6 +18,7 @@ namespace Elenore::Core
         int shouldClose() const;
         void draw(const GLclampf &RED = 0.1f, const GLclampf &GREEN = 0.1f, const GLclampf &BLUE = 0.1f, const GLclampf &ALPHA = 1.0f) const;
         void pollEvents() const;
+        void run();
         ~Window();
     private:
         GLFWwindow *_window;

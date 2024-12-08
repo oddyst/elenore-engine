@@ -5,8 +5,7 @@
 
 #include <GL/glew.h>
 
-#include "elenore/logger.hpp"
-#include "elenore/window.hpp"
+#include "elenore/elenore.hpp"
 
 namespace Elenore::Core
 {
@@ -74,6 +73,17 @@ namespace Elenore::Core
             Log::info("Window destroyed");
         }
         glfwTerminate();
+    }
+
+    void Window::run()
+    {
+        
+        while (!shouldClose())
+        {
+            draw();
+            
+            pollEvents();
+        }
     }
 
 } // namespace Elenore::Core
